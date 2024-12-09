@@ -18,6 +18,8 @@ namespace car_management_backend.Data.Entities
 
         public int CarGarageId { get; set; }
         public Garage Garage { get; set; } = null!;
+
+        public ICollection<Garage> GarageIds { get; set; }
     }
 }
 

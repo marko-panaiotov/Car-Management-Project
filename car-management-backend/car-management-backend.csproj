@@ -10,6 +10,16 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Compile Remove="Data\NewFolder1\**" />
+    <Compile Remove="Data\NewFolder\**" />
+    <Content Remove="Data\NewFolder1\**" />
+    <Content Remove="Data\NewFolder\**" />
+    <EmbeddedResource Remove="Data\NewFolder1\**" />
+    <EmbeddedResource Remove="Data\NewFolder\**" />
+    <None Remove="Data\NewFolder1\**" />
+    <None Remove="Data\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />

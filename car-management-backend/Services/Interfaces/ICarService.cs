@@ -1,4 +1,5 @@
-﻿using car_management_backend.Data.Entities;
+﻿using car_management_backend.Data.Dtos.CarDtos;
+using car_management_backend.Data.Entities;
 
 namespace car_management_backend.Services.Interfaces
 {
@@ -6,8 +7,8 @@ namespace car_management_backend.Services.Interfaces
     {
         Car GetCar(int id);
         List<Car> GetAllCars();
-        void CreateCar(Car car);
-        void UpdateCar(Car car);
+        void CreateCar(CreateCarDto car);
+        void UpdateCar(int id, UpdateCarDto car);
         void DeleteCar(int id);
     }
 }

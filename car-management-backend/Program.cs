@@ -28,6 +28,12 @@ namespace car_management_backend
             builder.Services.AddTransient<ICarRepository, CarRepository>();
             builder.Services.AddTransient<ICarService, CarService>();
 
+            builder.Services.AddTransient<IGarageRepository, GarageRepository>();
+            builder.Services.AddTransient<IGarageService, GarageService>();
+
+            builder.Services.AddTransient<IMaintenanceRepository, MaintenanceRepository>();
+            builder.Services.AddTransient<IMaintenanceService, MaintenanceService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,6 +1,8 @@
-﻿namespace car_management_backend.Services
+﻿using car_management_backend.Services.Interfaces;
+
+namespace car_management_backend.Services
 {
-    public class MaintenanceService
+    public class MaintenanceService : IMaintenanceService
     {
     }
 }

@@ -44,13 +44,14 @@ namespace car_management_backend.Data.Repositories
 
         public void UpdateCar(Car car)
         {
-            var carToUpdate = _dbContext.Cars
-                .FirstOrDefault(c => c.CarId == car.CarId);
-            carToUpdate.CarManufacturer = car.CarManufacturer;
+            /*var carToUpdate = _dbContext.Cars
+                .FirstOrDefault(c => c.CarId == car.CarId);*/
+            _dbContext.Cars.Update(car);
+     /*       carToUpdate.CarManufacturer = car.CarManufacturer;
             carToUpdate.CarModel = car.CarModel;
             carToUpdate.CarProductionYear = car.CarProductionYear;
             carToUpdate.CarLicensePlate = car.CarLicensePlate;
-            carToUpdate.CarGarageId = car.CarGarageId;
+            carToUpdate.CarGarageId = car.CarGarageId;*/
         }
 
         public void SaveChanges()
