@@ -30,9 +30,6 @@
     <None Remove="Data\Repositories\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Data\" />
     <Folder Include="Data\Entities\" />
-    <Folder Include="Data\Repositories\" />
   </ItemGroup>
 </Project>

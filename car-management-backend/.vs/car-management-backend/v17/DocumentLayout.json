@@ -1,7 +1,80 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\controllers\\garagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:controllers\\garagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\controllers\\maintenancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:controllers\\maintenancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\garageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\garageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\interfaces\\imaintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\interfaces\\imaintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\interfaces\\imaintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\interfaces\\imaintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\interfaces\\igarageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\interfaces\\igarageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\garagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\garagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\interfaces\\igaragerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\interfaces\\igaragerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\carmanagementdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\carmanagementdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\services\\interfaces\\icarservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:services\\interfaces\\icarservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\data\\repositories\\interfaces\\icarrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:data\\repositories\\interfaces\\icarrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|d:\\bat marko\\university\\fourth year 2024-2025\\\u0443\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\car-management-project\\car-management-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|car-management-backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,6 +123,240 @@
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MaintenanceController.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\MaintenanceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MaintenanceController.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\MaintenanceController.cs",
+              "RelativeToolTip": "Controllers\\MaintenanceController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:22:06.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GarageController.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\GarageController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GarageController.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\GarageController.cs",
+              "RelativeToolTip": "Controllers\\GarageController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:21:43.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GarageService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\GarageService.cs",
+              "RelativeDocumentMoniker": "Services\\GarageService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\GarageService.cs",
+              "RelativeToolTip": "Services\\GarageService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:21:12.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MaintenanceService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\MaintenanceService.cs",
+              "RelativeDocumentMoniker": "Services\\MaintenanceService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\MaintenanceService.cs",
+              "RelativeToolTip": "Services\\MaintenanceService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:20:55.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IMaintenanceService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\IMaintenanceService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IMaintenanceService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\IMaintenanceService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IMaintenanceService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:20:27.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IGarageService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\IGarageService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IGarageService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\IGarageService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IGarageService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:20:05.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GarageRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\GarageRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\GarageRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\GarageRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\GarageRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:19:34.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MaintenanceRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\MaintenanceRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\MaintenanceRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\MaintenanceRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\MaintenanceRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:19:09.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IMaintenanceRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\IMaintenanceRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\Interfaces\\IMaintenanceRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\IMaintenanceRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\Interfaces\\IMaintenanceRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:18:30.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IGarageRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\IGarageRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\Interfaces\\IGarageRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\IGarageRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\Interfaces\\IGarageRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:17:42.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T14:00:46.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CarController.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\CarController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CarController.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Controllers\\CarController.cs",
+              "RelativeToolTip": "Controllers\\CarController.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAowC8AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T13:51:17.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CarService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\CarService.cs",
+              "RelativeDocumentMoniker": "Services\\CarService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\CarService.cs",
+              "RelativeToolTip": "Services\\CarService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T13:50:33.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ICarService.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\ICarService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\ICarService.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Services\\Interfaces\\ICarService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\ICarService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T13:50:03.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CarRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\CarRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\CarRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\CarRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\CarRepository.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAYwDoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T13:44:42.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ICarRepository.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\ICarRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\Interfaces\\ICarRepository.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\Repositories\\Interfaces\\ICarRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\Interfaces\\ICarRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T13:42:23.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CarManagementDbContext.cs",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\CarManagementDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\CarManagementDbContext.cs",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\Data\\CarManagementDbContext.cs",
+              "RelativeToolTip": "Data\\CarManagementDbContext.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwBAAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T12:23:25.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\bat Marko\\University\\Fourth year 2024-2025\\\u0423\u0435\u0431 \u0441\u044A\u0440\u0432\u044A\u0440\u043D\u0438 \u0435\u0437\u0438\u0446\u0438\\Car-Management-Project\\car-management-backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-09T12:00:43.144Z",
+              "EditorCaption": ""
             }
           ]
         }

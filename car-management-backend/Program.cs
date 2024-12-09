@@ -1,5 +1,9 @@
 
 using car_management_backend.Data;
+using car_management_backend.Data.Repositories.Interfaces;
+using car_management_backend.Data.Repositories;
+using car_management_backend.Services.Interfaces;
+using car_management_backend.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace car_management_backend
@@ -19,6 +23,10 @@ namespace car_management_backend
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<CarManagementDbContext>(options => options.UseSqlServer(connectionString));
+
+            //Register services
+            builder.Services.AddTransient<ICarRepository, CarRepository>();
+            builder.Services.AddTransient<ICarService, CarService>();
 
             var app = builder.Build();
 
