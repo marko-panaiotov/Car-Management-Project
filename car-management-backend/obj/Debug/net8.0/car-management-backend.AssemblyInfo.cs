@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("car-management-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b27a303afbb85e16d81d16bd07879012e69ca8cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7da015ba105cb62bb61876bc95d49b016c07fdab")]
 [assembly: System.Reflection.AssemblyProductAttribute("car-management-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("car-management-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

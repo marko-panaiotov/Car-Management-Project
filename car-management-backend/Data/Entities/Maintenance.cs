@@ -6,21 +6,21 @@ namespace car_management_backend.Data.Entities
 {
     public class Maintenance
     {
-        public int MaintenanceId { get; set; }
+        public int Id { get; set; }
 
-        public int MaintenanceCarId { get; set; }
+        public int CarId { get; set; }
         public Car Car { get; set; } = null!;
 
-        public string MaintenanceCarName { get; set; } = null!;
+        public string CarName { get; set; } = null!;
 
-        public string MaintenanceServiceType { get; set; } = null!;
+        public string ServiceType { get; set; } = null!;
 
-        public DateTime MaintenanceScheduledTime { get; set; }
+        public DateTime ScheduledTime { get; set; }
 
-        public int MaintenanceGarageId { get; set; }
+        public int GarageId { get; set; }
         public Garage Garage { get; set; } = null!;
 
-        public string MaintenaceGarageName { get; set; } = null!;
+        public string GarageName { get; set; } = null!;
     }
 }
 

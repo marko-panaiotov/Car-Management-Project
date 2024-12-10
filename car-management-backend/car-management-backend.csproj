@@ -39,7 +39,4 @@
     <None Remove="Data\Entities\" />
     <None Remove="Data\Repositories\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Entities\" />
-  </ItemGroup>
 </Project>

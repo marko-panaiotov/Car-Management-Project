@@ -9,18 +9,18 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace car_management_backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class CarsController : ControllerBase
+    [Route("[controller]")]
+    public class carsController : ControllerBase
     {
         private readonly ICarService _carService;
 
-        public CarsController(ICarService carService)
+        public carsController(ICarService carService)
         {
             _carService = carService;
         }
 
 
-        [HttpGet("GetAllCars")]
+        [HttpGet]
         public List<ResponseCarDto> GetAllCars()
         {
             var result = _carService.GetAllCars();
@@ -29,28 +29,28 @@ namespace car_management_backend.Controllers
            .ToList();
         }
 
-        [HttpGet("GetCarById")]
-        public Car GetCar(int carId)
+        [HttpGet("{id}")]
+        public Car GetCar([FromQuery] int id)
         {
-            return _carService.GetCar(carId);
+            return _carService.GetCar(id);
         }
 
-        [HttpPost("AddNewCar")]
+        [HttpPost]
         public void AddNewCar([FromBody] CreateCarDto car)
         {
             _carService.CreateCar(car);
         }
 
-        [HttpPut("EditCarById")]
+        [HttpPut("{id}")]
         public void UpdateCar([FromQuery] int id, [FromBody] UpdateCarDto car)
         {
             _carService.UpdateCar(id,car);
         }
 
-        [HttpDelete("DeleteCarById")]
-        public void DeleteCar(int carId)
+        [HttpDelete("{id}")]
+        public void DeleteCar([FromQuery] int id)
         {
-            _carService.DeleteCar(carId);
+            _carService.DeleteCar(id);
         }
     }
 }

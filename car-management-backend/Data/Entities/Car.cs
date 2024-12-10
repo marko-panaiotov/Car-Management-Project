@@ -8,18 +8,19 @@ namespace car_management_backend.Data.Entities
     {
         public int CarId { get; set; }
 
-        public string CarManufacturer { get; set; } = null!;
+        public string Make { get; set; } = null!;
 
-        public string CarModel { get; set; } = null!;
+        public string Model { get; set; } = null!;
 
-        public DateTime CarProductionYear { get; set; }
+        public DateTime ProductionYear { get; set; }
 
-        public string CarLicensePlate { get; set; } = null!;
+        public string LicensePlate { get; set; } = null!;
 
         public int CarGarageId { get; set; }
         public Garage Garage { get; set; } = null!;
 
-        public ICollection<Garage> GarageIds { get; set; }
+
+
     }
 }
 

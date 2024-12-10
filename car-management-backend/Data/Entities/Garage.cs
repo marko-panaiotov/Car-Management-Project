@@ -8,14 +8,12 @@ namespace car_management_backend.Data.Entities
     {
         public int GarageId { get; set; }
 
-        public string GarageName { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
-        public string GarageLocation { get; set; } = null!;
+        public string Location { get; set; } = null!;
 
-        public string GarageCity { get; set; } = null!;
-
-        public int GarageCapacity { get; set; }
-
+        public int Capacity { get; set; }
+        public string City { get; set; } = null!;
     }
 }
 

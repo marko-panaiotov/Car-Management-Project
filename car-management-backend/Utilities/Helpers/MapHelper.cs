@@ -9,11 +9,11 @@ namespace car_management_backend.Utilities.Helpers
         {
             return new CreateCarDto()
             {
-                Manufacturer = car.CarManufacturer,
-                Model = car.CarModel,
-                ProductionYear = car.CarProductionYear,
-                LicensePlate = car.CarLicensePlate,
-                GarageIds = car.GarageIds
+                Make = car.Make,
+                Model = car.Model,
+                ProductionYear = car.ProductionYear,
+                LicensePlate = car.LicensePlate,
+                GarageIds = new List<int> { car.CarGarageId }
             };
         }
 
@@ -21,12 +21,11 @@ namespace car_management_backend.Utilities.Helpers
         {
             return new UpdateCarDto()
             {
-                Manufacturer = car.CarManufacturer,
-                Model = car.CarModel,
-                ProductionYear = car.CarProductionYear,
-                LicensePlate = car.CarLicensePlate,
-                GarageIds = car.GarageIds,
-                //garage = car.CarGarageId
+                Make = car.Make,
+                Model = car.Model,
+                ProductionYear = car.ProductionYear,
+                LicensePlate = car.LicensePlate,
+                GarageIds = new List<int> { car.CarGarageId }
             };
         }
 
@@ -35,11 +34,11 @@ namespace car_management_backend.Utilities.Helpers
             return new ResponseCarDto()
             {
                 Id = car.CarId,
-                Manufacturer = car.CarManufacturer,
-                Model = car.CarModel,
-                ProductionYear = car.CarProductionYear,
-                LicensePlate = car.CarLicensePlate,
-                Garages = car.GarageIds
+                Make = car.Make,
+                Model = car.Model,
+                ProductionYear = car.ProductionYear,
+                LicensePlate = car.LicensePlate,
+                Garages = new List<int> { car.CarGarageId }
             };
         }
 

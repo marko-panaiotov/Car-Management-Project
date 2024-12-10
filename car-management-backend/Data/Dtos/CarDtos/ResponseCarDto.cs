@@ -6,7 +6,7 @@ namespace car_management_backend.Data.Dtos.CarDtos
     {
         public int Id { get; set; }
 
-        public string Manufacturer { get; set; } = null!;
+        public string Make { get; set; } = null!;
 
         public string Model { get; set; } = null!;
 
@@ -14,7 +14,8 @@ namespace car_management_backend.Data.Dtos.CarDtos
 
         public string LicensePlate { get; set; } = null!;
 
-        public virtual ICollection<Garage> Garages { get; set; }
+        public virtual ICollection<int> Garages { get; set; }
+        //public ICollection<CarGarage> Garages { get; set; } = new List<CarGarage>();
 
     }
 }

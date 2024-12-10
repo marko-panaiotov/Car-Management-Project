@@ -3,6 +3,7 @@ using car_management_backend.Data.Dtos.CarDtos;
 using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
+using System.Data.Common;
 using System.IO;
 
 namespace car_management_backend.Services
@@ -20,11 +21,11 @@ namespace car_management_backend.Services
         {
             var car = new Car
             {
-                CarManufacturer = carDto.Manufacturer,
-                CarModel = carDto.Model,
-                CarProductionYear = carDto.ProductionYear,
-                CarLicensePlate = carDto.LicensePlate,
-                GarageIds = carDto.GarageIds
+                Make = carDto.Make,
+                Model = carDto.Model,
+                ProductionYear = carDto.ProductionYear,
+                LicensePlate = carDto.LicensePlate,
+                CarGarageId = carDto.GarageIds.FirstOrDefault(),
             };
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();
@@ -42,16 +43,18 @@ namespace car_management_backend.Services
 
         public void UpdateCar(int id, UpdateCarDto carDto)
         {
-            var car = _carRepo.GetCarById(id);
+            Car tets=new Car();
+            tets.CarId = id;
+            var car = _carRepo.GetCarById(tets.CarId);
+            
 
             if (car != null)
             {
-                car.CarManufacturer = carDto.Manufacturer;
-                car.CarModel = carDto.Model;
-                car.CarProductionYear = carDto.ProductionYear;
-                car.CarLicensePlate = carDto.LicensePlate;
-                //car.GarageIds = carDto.GarageIds;
-                car.GarageIds = carDto.garage;
+                car.Make = carDto.Make;
+                car.Model = carDto.Model;
+                car.ProductionYear = carDto.ProductionYear;
+                car.LicensePlate = carDto.LicensePlate;
+                car.CarGarageId = carDto.GarageIds.FirstOrDefault();
                 _carRepo.UpdateCar(car);
                 _carRepo.SaveChanges();
             }

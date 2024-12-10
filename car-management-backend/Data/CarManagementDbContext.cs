@@ -27,13 +27,13 @@ namespace car_management_backend.Data
             modelBuilder.Entity<Maintenance>()
             .HasOne(m => m.Garage)
             .WithMany()
-            .HasForeignKey(m => m.MaintenanceGarageId)
+            .HasForeignKey(m => m.GarageId)
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Maintenance>()
             .HasOne(m => m.Car)
             .WithMany()
-            .HasForeignKey(m => m.MaintenanceCarId)
+            .HasForeignKey(m => m.CarId)
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Car>()
