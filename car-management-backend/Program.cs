@@ -34,6 +34,8 @@ namespace car_management_backend
             builder.Services.AddTransient<IMaintenanceRepository, MaintenanceRepository>();
             builder.Services.AddTransient<IMaintenanceService, MaintenanceService>();
 
+            builder.Services.AddCors();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -49,6 +51,12 @@ namespace car_management_backend
 
 
             app.MapControllers();
+
+            app.UseCors(builder =>
+             builder.WithOrigins("http://localhost:3000") // React app URL
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+            app.UseRouting();
 
             app.Run();
         }

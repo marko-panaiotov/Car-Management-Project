@@ -1,7 +1,9 @@
 ﻿namespace car_management_backend.Data.Dtos.GarageDtos
 {
-    public class CreateGarageDto
+    public class ResponseGarageDto
     {
+        public int Id { get; set; }
+
         public string Name { get; set; } = null!;
 
         public string Location { get; set; } = null!;

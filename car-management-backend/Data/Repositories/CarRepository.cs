@@ -14,17 +14,17 @@ namespace car_management_backend.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public List<Car> GetAllCars()
+        public IEnumerable<Car> GetAllCars()
         {
-            return _dbContext.Cars.ToList();
-                /*.AsNoTracking()
-                .Include(c => c.CarGarageId)
-                .ToList();*/
+            return _dbContext.Cars
+                .AsNoTracking()
+                .Include(c => c.Garage)
+                .ToList();
         }
 
         public Car GetCarById(int id)
         {
-            return _dbContext.Cars.Find(id);
+            return _dbContext.Cars.Include(c => c.Garage).FirstOrDefault(c => c.CarId == id);
         }
 
         public Car AddCar(Car car)

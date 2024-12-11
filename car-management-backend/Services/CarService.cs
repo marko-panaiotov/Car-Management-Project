@@ -3,6 +3,7 @@ using car_management_backend.Data.Dtos.CarDtos;
 using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
+using car_management_backend.Utilities.Helpers;
 using System.Data.Common;
 using System.IO;
 
@@ -25,27 +26,28 @@ namespace car_management_backend.Services
                 Model = carDto.Model,
                 ProductionYear = carDto.ProductionYear,
                 LicensePlate = carDto.LicensePlate,
-                CarGarageId = carDto.GarageIds.FirstOrDefault(),
+                //CarGarageId =carDto.GarageIds
             };
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();
+            MapHelper.MapCreateCarToDto(car);
         }
 
-        public List<Car> GetAllCars()
+        public IEnumerable<ResponseCarDto> GetAllCars()
         {
-            return _carRepo.GetAllCars();
+            var cars = _carRepo.GetAllCars();
+            return cars.Select(c => MapHelper.MapResponseCarToDto(c));
         }
 
-        public Car GetCar(int id)
+        public ResponseCarDto GetCar(int id)
         {
-            return _carRepo.GetCarById(id);
+            var carById = _carRepo.GetCarById(id);
+            return MapHelper.MapResponseCarToDto(carById);
         }
 
         public void UpdateCar(int id, UpdateCarDto carDto)
         {
-            Car tets=new Car();
-            tets.CarId = id;
-            var car = _carRepo.GetCarById(tets.CarId);
+            var car = _carRepo.GetCarById(id);
             
 
             if (car != null)
@@ -57,8 +59,10 @@ namespace car_management_backend.Services
                 car.CarGarageId = carDto.GarageIds.FirstOrDefault();
                 _carRepo.UpdateCar(car);
                 _carRepo.SaveChanges();
+                MapHelper.MapUpdateCarToDto(car);
             }
                 //_carRepo.UpdateCar(car);
+
         }
 
         public void DeleteCar(int id)

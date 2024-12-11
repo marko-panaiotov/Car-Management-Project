@@ -1,4 +1,5 @@
 ﻿using car_management_backend.Data.Dtos.CarDtos;
+using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Entities;
 
 namespace car_management_backend.Utilities.Helpers
@@ -13,7 +14,7 @@ namespace car_management_backend.Utilities.Helpers
                 Model = car.Model,
                 ProductionYear = car.ProductionYear,
                 LicensePlate = car.LicensePlate,
-                GarageIds = new List<int> { car.CarGarageId }
+                GarageIds = new List<Garage> { car.Garage }
             };
         }
 
@@ -38,7 +39,48 @@ namespace car_management_backend.Utilities.Helpers
                 Model = car.Model,
                 ProductionYear = car.ProductionYear,
                 LicensePlate = car.LicensePlate,
-                Garages = new List<int> { car.CarGarageId }
+                Garages = new ResponseGarageDto() { 
+                
+                    Id = car.Garage.GarageId,
+                    Name = car.Garage.Name,
+                    Location = car.Garage.Location,
+                    City = car.Garage.City,
+                    Capacity = car.Garage.Capacity
+                }
+            };
+        }
+
+        public static CreateGarageDto MapCreateGarageToDto(Garage garage)
+        {
+            return new CreateGarageDto()
+            {
+                Name = garage.Name,
+                Location = garage.Location,
+                City = garage.City,
+                Capacity = garage.Capacity
+            };
+        }
+
+        public static UpdateGarageDto MapUpdateGarageToDto(Garage garage)
+        {
+            return new UpdateGarageDto()
+            {
+                Name = garage.Name,
+                Location = garage.Location,
+                City = garage.City,
+                Capacity = garage.Capacity
+            };
+        }
+
+        public static ResponseGarageDto MapResponseGarageToDto(Garage garage)
+        {
+            return new ResponseGarageDto()
+            {
+                Id = garage.GarageId,
+                Name = garage.Name,
+                Location = garage.Location,
+                City = garage.City,
+                Capacity = garage.Capacity
             };
         }
 

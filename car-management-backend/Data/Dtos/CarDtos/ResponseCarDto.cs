@@ -1,4 +1,5 @@
-﻿using car_management_backend.Data.Entities;
+﻿using car_management_backend.Data.Dtos.GarageDtos;
+using car_management_backend.Data.Entities;
 
 namespace car_management_backend.Data.Dtos.CarDtos
 {
@@ -14,7 +15,8 @@ namespace car_management_backend.Data.Dtos.CarDtos
 
         public string LicensePlate { get; set; } = null!;
 
-        public virtual ICollection<int> Garages { get; set; }
+        //public ICollection<Garage> Garages { get; set; }
+        public ResponseGarageDto Garages { get; set; }
         //public ICollection<CarGarage> Garages { get; set; } = new List<CarGarage>();
 
     }

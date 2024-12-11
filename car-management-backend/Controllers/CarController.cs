@@ -1,10 +1,6 @@
 ﻿using car_management_backend.Data.Dtos.CarDtos;
-using car_management_backend.Data.Entities;
 using car_management_backend.Services.Interfaces;
-using car_management_backend.Utilities.Helpers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace car_management_backend.Controllers
 {
@@ -21,36 +17,38 @@ namespace car_management_backend.Controllers
 
 
         [HttpGet]
-        public List<ResponseCarDto> GetAllCars()
+        public IActionResult GetAllCars()
         {
             var result = _carService.GetAllCars();
-            return result
-           .Select(c => MapHelper.MapResponseCarToDto(c))
-           .ToList();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public Car GetCar([FromQuery] int id)
+        public IActionResult GetCar(int id)
         {
-            return _carService.GetCar(id);
+            var car = _carService.GetCar(id);
+            return Ok(car);
         }
 
         [HttpPost]
-        public void AddNewCar([FromBody] CreateCarDto car)
+        public IActionResult AddNewCar([FromBody] CreateCarDto car)
         {
             _carService.CreateCar(car);
+            return Ok(car);
         }
 
         [HttpPut("{id}")]
-        public void UpdateCar([FromQuery] int id, [FromBody] UpdateCarDto car)
+        public IActionResult UpdateCar(int id, [FromBody] UpdateCarDto car)
         {
             _carService.UpdateCar(id,car);
+            return Ok(car);
         }
 
         [HttpDelete("{id}")]
-        public void DeleteCar([FromQuery] int id)
+        public IActionResult DeleteCar(int id)
         {
             _carService.DeleteCar(id);
+            return Ok(id);
         }
     }
 }

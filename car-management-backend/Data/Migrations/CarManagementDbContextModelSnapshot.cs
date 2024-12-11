@@ -22,7 +22,7 @@ namespace car_management_backend.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
+            modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
                 {
                     b.Property<int>("CarId")
                         .ValueGeneratedOnAdd()
@@ -121,7 +121,7 @@ namespace car_management_backend.Data.Migrations
                     b.ToTable("Maintenenaces");
                 });
 
-            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
+            modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
                 {
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany()
@@ -134,7 +134,7 @@ namespace car_management_backend.Data.Migrations
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Maintenance", b =>
                 {
-                    b.HasOne("car_management_backend.Data.Entities.Car", "Car")
+                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany()
                         .HasForeignKey("MaintenanceCarId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -146,7 +146,7 @@ namespace car_management_backend.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("Garage");
 
                     b.Navigation("Garage");
                 });
