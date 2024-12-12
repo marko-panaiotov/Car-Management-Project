@@ -6,6 +6,8 @@ using car_management_backend.Services.Interfaces;
 using car_management_backend.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
 
 namespace car_management_backend
 {
@@ -20,6 +22,8 @@ namespace car_management_backend
             builder.Services.AddControllers(options =>
             {
                 options.Filters.Add(new ProducesAttribute("application/json"));
+                //.JsonSerializerOptions.Converters.Add(new JsonDateFormatConverter("yyyy-MM-dd"));
+
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

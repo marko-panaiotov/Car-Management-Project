@@ -25,7 +25,7 @@ namespace car_management_backend.Services
             {
                 Make = carDto.Make,
                 Model = carDto.Model,
-                ProductionYear = carDto.ProductionYear,
+                ProductionYear = carDto.ProductionYear.ToString("yyyy-mm-dd"),
                 LicensePlate = carDto.LicensePlate,
                 CarGarageId = carDto.GarageIds.FirstOrDefault(),
             };
@@ -55,7 +55,7 @@ namespace car_management_backend.Services
             {
                 car.Make = carDto.Make;
                 car.Model = carDto.Model;
-                car.ProductionYear = carDto.ProductionYear;
+                car.ProductionYear = carDto.ProductionYear.ToString("yyyy-mm-dd");
                 car.LicensePlate = carDto.LicensePlate;
                 car.CarGarageId = carDto.GarageIds.FirstOrDefault();
                 _carRepo.UpdateCar(car);

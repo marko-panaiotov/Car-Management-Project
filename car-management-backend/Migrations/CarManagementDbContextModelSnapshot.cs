@@ -45,8 +45,9 @@ namespace car_management_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ProductionYear")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ProductionYear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CarId");
 

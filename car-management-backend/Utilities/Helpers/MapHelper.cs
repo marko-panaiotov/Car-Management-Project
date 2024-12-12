@@ -12,8 +12,8 @@ namespace car_management_backend.Utilities.Helpers
             {
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = car.ProductionYear,
-                LicensePlate = car.LicensePlate,
+                ProductionYear = int.Parse(car.ProductionYear.ToString()),
+                LicensePlate = car.LicensePlate, 
                 GarageIds = new List<int> { car.CarGarageId }
             };
         }
@@ -24,7 +24,7 @@ namespace car_management_backend.Utilities.Helpers
             {
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = car.ProductionYear,
+                ProductionYear = int.Parse(car.ProductionYear.ToString()),
                 LicensePlate = car.LicensePlate,
                 GarageIds = new List<int> { car.CarGarageId }
             };
@@ -37,16 +37,18 @@ namespace car_management_backend.Utilities.Helpers
                 Id = car.CarId,
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = car.ProductionYear,
+                ProductionYear = int.Parse(car.ProductionYear.ToString()),
                 LicensePlate = car.LicensePlate,
-                Garages = new ResponseGarageDto()
-                { 
-                
-                    Id = car.Garage.GarageId,
-                    Name = car.Garage.Name,
-                    Location = car.Garage.Location,
-                    City = car.Garage.City,
-                    Capacity = car.Garage.Capacity
+                Garages = new List<ResponseGarageDto>()
+                {
+                  new ResponseGarageDto()
+                  {
+                      Id = car.Garage.GarageId,
+                      Name = car.Garage.Name,
+                      Location = car.Garage.Location,
+                      City = car.Garage.City,
+                      Capacity = car.Garage.Capacity
+                  }
                 }
             };
         }

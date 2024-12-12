@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace car_management_backend.Data.Entities
 {
@@ -12,16 +13,12 @@ namespace car_management_backend.Data.Entities
 
         public string Model { get; set; } = null!;
 
-        public DateTime ProductionYear { get; set; }
+        public string ProductionYear { get; set; }
 
         public string LicensePlate { get; set; } = null!;
 
         public int CarGarageId { get; set; }
         public Garage Garage { get; set; } = null!;
-
-        //public List<int> Garages { get; set; } = new List<int>();
-
-
 
     }
 }

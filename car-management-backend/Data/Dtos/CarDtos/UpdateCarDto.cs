@@ -1,4 +1,5 @@
 ﻿using car_management_backend.Data.Entities;
+using System.Globalization;
 
 namespace car_management_backend.Data.Dtos.CarDtos
 {
@@ -8,7 +9,7 @@ namespace car_management_backend.Data.Dtos.CarDtos
 
         public string Model { get; set; } = null!;
 
-        public DateTime ProductionYear { get; set; }
+        public int ProductionYear { get; set; }
 
         public string LicensePlate { get; set; } = null!;
         public List<int> GarageIds { get; set; }

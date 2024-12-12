@@ -1,5 +1,6 @@
 ﻿using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Entities;
+using System.Globalization;
 
 namespace car_management_backend.Data.Dtos.CarDtos
 {
@@ -11,11 +12,10 @@ namespace car_management_backend.Data.Dtos.CarDtos
 
         public string Model { get; set; } = null!;
 
-        public DateTime ProductionYear { get; set; }
-
+        public int ProductionYear { get; set; }
         public string LicensePlate { get; set; } = null!;
 
-        public ResponseGarageDto Garages { get; set; }
+        public List<ResponseGarageDto> Garages { get; set; } = new List<ResponseGarageDto>();
         //public List<ResponseGarageDto> Garages { get; set; }
         //public ICollection<CarGarage> Garages { get; set; } = new List<CarGarage>();
 
