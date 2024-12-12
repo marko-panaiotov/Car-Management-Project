@@ -5,6 +5,7 @@ using car_management_backend.Data.Repositories;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace car_management_backend
 {
@@ -16,7 +17,10 @@ namespace car_management_backend
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add(new ProducesAttribute("application/json"));
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             // builder.Services.AddSwaggerGen();
