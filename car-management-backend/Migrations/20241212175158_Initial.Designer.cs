@@ -12,7 +12,7 @@ using car_management_backend.Data;
 namespace car_management_backend.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241212162710_Initial")]
+    [Migration("20241212175158_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -48,9 +48,8 @@ namespace car_management_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductionYear")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ProductionYear")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CarId");
 

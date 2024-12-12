@@ -6,6 +6,7 @@ using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Utilities.Helpers;
 using System.Data.Common;
+using System.Globalization;
 using System.IO;
 
 namespace car_management_backend.Services
@@ -25,10 +26,11 @@ namespace car_management_backend.Services
             {
                 Make = carDto.Make,
                 Model = carDto.Model,
-                ProductionYear = carDto.ProductionYear.ToString("yyyy-mm-dd"),
+                ProductionYear = DateTime.ParseExact(carDto.ProductionYear.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture),
                 LicensePlate = carDto.LicensePlate,
                 CarGarageId = carDto.GarageIds.FirstOrDefault(),
             };
+            
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();
             MapHelper.MapCreateCarToDto(car);
@@ -55,7 +57,7 @@ namespace car_management_backend.Services
             {
                 car.Make = carDto.Make;
                 car.Model = carDto.Model;
-                car.ProductionYear = carDto.ProductionYear.ToString("yyyy-mm-dd");
+                car.ProductionYear = DateTime.ParseExact(carDto.ProductionYear.ToString(),"yyyymmdd", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 car.LicensePlate = carDto.LicensePlate;
                 car.CarGarageId = carDto.GarageIds.FirstOrDefault();
                 _carRepo.UpdateCar(car);

@@ -13,8 +13,8 @@ namespace car_management_backend.Data.Entities
 
         public string Model { get; set; } = null!;
 
-        public string ProductionYear { get; set; }
-
+        public DateTime ProductionYear {  get; set; }
+     
         public string LicensePlate { get; set; } = null!;
 
         public int CarGarageId { get; set; }

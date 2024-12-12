@@ -1,6 +1,7 @@
 ﻿using car_management_backend.Data.Dtos.CarDtos;
 using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Entities;
+using System.Globalization;
 
 namespace car_management_backend.Utilities.Helpers
 {
@@ -12,7 +13,7 @@ namespace car_management_backend.Utilities.Helpers
             {
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = int.Parse(car.ProductionYear.ToString()),
+                ProductionYear = int.Parse(car.ProductionYear.ToString("yyyymmdd")),
                 LicensePlate = car.LicensePlate, 
                 GarageIds = new List<int> { car.CarGarageId }
             };
@@ -24,7 +25,7 @@ namespace car_management_backend.Utilities.Helpers
             {
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = int.Parse(car.ProductionYear.ToString()),
+                ProductionYear = int.Parse(car.ProductionYear.ToString("yyyy-mm-dd")),
                 LicensePlate = car.LicensePlate,
                 GarageIds = new List<int> { car.CarGarageId }
             };
@@ -32,12 +33,15 @@ namespace car_management_backend.Utilities.Helpers
 
         public static ResponseCarDto MapResponseCarToDto(Car car)
         {
+            var dateFormat = DateTime.ParseExact(car.ProductionYear.ToString(), "yyyymmdd",
+             CultureInfo.InvariantCulture).ToString("yyyy-mm-dd");
+
             return new ResponseCarDto()
             {
                 Id = car.CarId,
                 Make = car.Make,
                 Model = car.Model,
-                ProductionYear = int.Parse(car.ProductionYear.ToString()),
+                ProductionYear = int.Parse(dateFormat),
                 LicensePlate = car.LicensePlate,
                 Garages = new List<ResponseGarageDto>()
                 {
