@@ -9,11 +9,11 @@ using car_management_backend.Data;
 
 #nullable disable
 
-namespace car_management_backend.Data.Migrations
+namespace car_management_backend.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241207185746_Initial")]
-    partial class Initial
+    [Migration("20241212112344_AddedGarages")]
+    partial class AddedGarages
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace car_management_backend.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
+            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
                 {
                     b.Property<int>("CarId")
                         .ValueGeneratedOnAdd()
@@ -36,19 +36,19 @@ namespace car_management_backend.Data.Migrations
                     b.Property<int>("CarGarageId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CarLicensePlate")
+                    b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CarManufacturer")
+                    b.Property<string>("Make")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CarModel")
+                    b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CarProductionYear")
+                    b.Property<DateTime>("ProductionYear")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CarId");
@@ -66,18 +66,18 @@ namespace car_management_backend.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GarageId"));
 
-                    b.Property<int>("GarageCapacity")
+                    b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<string>("GarageCity")
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GarageLocation")
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GarageName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -88,43 +88,43 @@ namespace car_management_backend.Data.Migrations
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Maintenance", b =>
                 {
-                    b.Property<int>("MaintenanceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaintenanceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("MaintenaceGarageName")
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CarName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaintenanceCarId")
+                    b.Property<int>("GarageId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MaintenanceCarName")
+                    b.Property<string>("GarageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaintenanceGarageId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("MaintenanceScheduledTime")
+                    b.Property<DateTime>("ScheduledTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MaintenanceServiceType")
+                    b.Property<string>("ServiceType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaintenanceId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("MaintenanceCarId");
+                    b.HasIndex("CarId");
 
-                    b.HasIndex("MaintenanceGarageId");
+                    b.HasIndex("GarageId");
 
                     b.ToTable("Maintenenaces");
                 });
 
-            modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
+            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
                 {
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany()
@@ -137,19 +137,19 @@ namespace car_management_backend.Data.Migrations
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Maintenance", b =>
                 {
-                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
+                    b.HasOne("car_management_backend.Data.Entities.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("MaintenanceCarId")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany()
-                        .HasForeignKey("MaintenanceGarageId")
+                        .HasForeignKey("GarageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Garage");
+                    b.Navigation("Car");
 
                     b.Navigation("Garage");
                 });

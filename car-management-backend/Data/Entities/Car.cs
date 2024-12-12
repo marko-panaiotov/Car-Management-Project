@@ -19,6 +19,8 @@ namespace car_management_backend.Data.Entities
         public int CarGarageId { get; set; }
         public Garage Garage { get; set; } = null!;
 
+        //public List<int> Garages { get; set; } = new List<int>();
+
 
 
     }

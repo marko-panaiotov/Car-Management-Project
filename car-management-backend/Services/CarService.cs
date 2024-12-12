@@ -1,5 +1,6 @@
 ﻿using car_management_backend.Data.Dtos;
 using car_management_backend.Data.Dtos.CarDtos;
+using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
@@ -26,7 +27,7 @@ namespace car_management_backend.Services
                 Model = carDto.Model,
                 ProductionYear = carDto.ProductionYear,
                 LicensePlate = carDto.LicensePlate,
-                //CarGarageId =carDto.GarageIds
+                Garage = carDto.GarageIds
             };
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();

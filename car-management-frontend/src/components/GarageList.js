@@ -5,7 +5,7 @@ import { Table, Button, Container, Card, Form, Row, Col } from "react-bootstrap"
 const GarageList = () => {
 
   const [garages, setGarages] = useState([]);
-  const [newGarage, setNewGarage] = useState({ name: "", location: "", capacity: 0 });
+  const [newGarage, setNewGarage] = useState({ name: "", location: "",city:"", capacity: 0 });
   const [isUpdating, setIsUpdating] = useState(false);
   const [garageToUpdate, setGarageToUpdate] = useState(null);
   const [filterCity, setFilterCity] = useState("");
@@ -26,30 +26,57 @@ const GarageList = () => {
 
   const handleAddGarage = async () => {
     try {
-      const response = await axios.post("http://localhost:8088/garages", newGarage);
+      const capacity = parseInt(newGarage.capacity, 10);
+      if (isNaN(capacity) || capacity <= 0) {
+        alert("Capacity must be a positive number.");
+        return;
+      }
+  
+      const garageData = {
+        name: newGarage.name,
+        location: newGarage.location,
+        city: newGarage.city,
+        capacity,
+      };
+  
+      console.log("Garage data to be sent:", garageData);
+  
+      const response = await axios.post("http://localhost:8088/garages", garageData);
       alert("Garage added successfully!");
+  
       setGarages([...garages, response.data]);
-      setNewGarage({ name: "", location: "", city: "", capacity: 0 });
+  
+      setNewGarage({
+        name: "",
+        location: "",
+        city: "",
+        capacity: "",
+      });
     } catch (error) {
       console.error("Error adding garage:", error);
       alert("An error occurred while adding the garage.");
     }
   };
-
+  
   const handleUpdateGarage = async () => {
     if (!garageToUpdate || !garageToUpdate.id) {
       alert("No garage selected for update.");
-      console.log("garageToUpdate is invalid:", garageToUpdate);
       return;
     }
+  
     try {
-      console.log("Updating garage with ID:", garageToUpdate.id);
-      const response = await axios.put(
-        `http://localhost:8088/garages/${garageToUpdate.id}`,
-        garageToUpdate
-      );
+      const garageData = {
+        name: garageToUpdate.name,
+        location: garageToUpdate.location,
+        city: garageToUpdate.city,
+        capacity: parseInt(garageToUpdate.capacity, 10),
+      };
+  
+      await axios.put(`http://localhost:8088/garages/${garageToUpdate.id}`, garageData);
       alert("Garage updated successfully!");
+  
       fetchGarages();
+  
       setIsUpdating(false);
       setGarageToUpdate(null);
     } catch (error) {
@@ -57,18 +84,18 @@ const GarageList = () => {
       alert("An error occurred while updating the garage.");
     }
   };
-  const handleDeleteGarage = async (garageName) => {
+  
+  const handleDeleteGarage = async (garageId) => {
     if (window.confirm("Are you sure you want to delete this garage?")) {
       try {
-        await axios.delete(`http://localhost:8088/garages/${garageName}`);
+        await axios.delete(`http://localhost:8088/garages/${garageId}`);
         alert("Garage deleted successfully!");
         fetchGarages();
       } catch (error) {
         console.error("Error deleting garage:", error);
-        alert("An error occurred while deleting the garage.");
       }
     }
-  };
+  };  
 
   const fetchGarageReport = async () => {
     const { garageId, startDate, endDate } = reportFilter;
@@ -99,12 +126,15 @@ const GarageList = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Field changed: ${name}, Value: ${value}`);
+  
     if (isUpdating) {
       setGarageToUpdate((prevGarage) => ({ ...prevGarage, [name]: value }));
     } else {
       setNewGarage((prevGarage) => ({ ...prevGarage, [name]: value }));
     }
   };
+  
 
   const handleReportFilterChange = (e) => {
     const { name, value } = e.target;
@@ -208,9 +238,9 @@ const GarageList = () => {
                   <Form.Label>City</Form.Label>
                   <Form.Control
                     type="text"
-                    name="City"
+                    name="city"
                     placeholder="Enter City"
-                    value={isUpdating ? garageToUpdate?.City || "" : newGarage.City}
+                    value={isUpdating ? garageToUpdate?.city || "" : newGarage.city}
                     onChange={handleChange}
                   />
                 </Form.Group>

@@ -14,7 +14,7 @@ namespace car_management_backend.Utilities.Helpers
                 Model = car.Model,
                 ProductionYear = car.ProductionYear,
                 LicensePlate = car.LicensePlate,
-                GarageIds = new List<Garage> { car.Garage }
+                GarageIds = car.Garage
             };
         }
 
