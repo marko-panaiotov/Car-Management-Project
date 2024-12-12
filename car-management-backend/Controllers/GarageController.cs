@@ -3,6 +3,10 @@ using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Services;
 using car_management_backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics.Metrics;
+using System.Net;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace car_management_backend.Controllers
 {
@@ -19,38 +23,52 @@ namespace car_management_backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllGarages()
+        [SwaggerResponse(200, "Resource found")]
+        [SwaggerResponse(400, "Bad request")]
+
+        public async Task<ActionResult<ResponseGarageDto>> GetAllGarages()
         {
             var result = _garageService.GetAllGarages();
             return Ok(result);
         }
-
+        
         [HttpGet("{id}")]
-        public IActionResult GetGarage(int id)
+        [SwaggerResponse(200, "Resource found")]
+        [SwaggerResponse(400, "Bad request")]
+        [SwaggerResponse(404, "Resource not found")]
+        public async Task<ActionResult<ResponseGarageDto>> GetGarage(int id)
         {
             var car = _garageService.GetGarage(id);
             return Ok(car);
         }
 
         [HttpPost]
-        public IActionResult AddNewGarage([FromBody] CreateGarageDto garageDto)
+        [SwaggerResponse(200, "Resource created")]
+        [SwaggerResponse(400, "Bad request")]
+        public async Task<ActionResult<ResponseGarageDto>> AddNewGarage([FromBody] CreateGarageDto garageDto)
         {
             _garageService.CreateGarage(garageDto);
             return Ok(garageDto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateGarage(int id, [FromBody] UpdateGarageDto garageDto)
+        [SwaggerResponse(200, "Resource updated")]
+        [SwaggerResponse(400, "Bad request")]
+        [SwaggerResponse(404, "Resource not found")]
+        public async Task<ActionResult<ResponseGarageDto>> UpdateGarage(int id, [FromBody] UpdateGarageDto garageDto)
         {
             _garageService.UpdateGarage(id, garageDto);
             return Ok(garageDto);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteGarage(int id)
+        [SwaggerResponse(200, "Resource deleted")]
+        [SwaggerResponse(400, "Bad request")]
+        [SwaggerResponse(404, "Resource not found")]
+        public async Task<ActionResult<bool>> DeleteGarage( int id)
         {
             _garageService.DeleteGarage(id);
-            return Ok(id);
+            return Ok(true);
         }
 
 

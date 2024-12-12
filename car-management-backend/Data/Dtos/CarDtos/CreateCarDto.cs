@@ -12,6 +12,6 @@ namespace car_management_backend.Data.Dtos.CarDtos
 
         public string LicensePlate { get; set; } = null!;
 
-        public Garage GarageIds { get; set; }
+        public List<int> GarageIds { get; set; } = new List<int>();
     }
 }

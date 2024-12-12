@@ -11,6 +11,6 @@ namespace car_management_backend.Data.Dtos.CarDtos
         public DateTime ProductionYear { get; set; }
 
         public string LicensePlate { get; set; } = null!;
-        public ICollection<int> GarageIds { get; set; }
+        public List<int> GarageIds { get; set; }
     }
 }

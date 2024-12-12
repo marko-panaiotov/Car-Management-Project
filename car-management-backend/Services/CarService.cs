@@ -27,7 +27,7 @@ namespace car_management_backend.Services
                 Model = carDto.Model,
                 ProductionYear = carDto.ProductionYear,
                 LicensePlate = carDto.LicensePlate,
-                Garage = carDto.GarageIds
+                CarGarageId = carDto.GarageIds.FirstOrDefault(),
             };
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();
