@@ -26,19 +26,52 @@ namespace car_management_backend.Services
             {
                 Make = carDto.Make,
                 Model = carDto.Model,
-                ProductionYear = DateTime.ParseExact(carDto.ProductionYear.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture),
+                ProductionYear = carDto.ProductionYear,
                 LicensePlate = carDto.LicensePlate,
                 CarGarageId = carDto.GarageIds.FirstOrDefault(),
             };
-            
+
             _carRepo.AddCar(car);
             _carRepo.SaveChanges();
             MapHelper.MapCreateCarToDto(car);
         }
 
-        public IEnumerable<ResponseCarDto> GetAllCars()
+        public IEnumerable<ResponseCarDto> GetAllCars(string? carMake, int? garageId, int? fromYear, int? toYear)
         {
+            if (carMake != null || garageId != 0 || fromYear != 0 && toYear != 0)
+             {
+                if (carMake != null)
+                {
+                    return GetCarsByMake(carMake);
+                }
+                if (garageId != 0)
+                {
+                    return GetCarsByGarageId(garageId);
+                }
+                if (fromYear != 0 && toYear != 0)
+                {
+                    return GetCarsFromYearToYear(fromYear, toYear);
+                }
+            }
             var cars = _carRepo.GetAllCars();
+            return cars.Select(c => MapHelper.MapResponseCarToDto(c));
+        }
+
+        public IEnumerable<ResponseCarDto> GetCarsByMake(string? make)
+        {
+            var cars = _carRepo.GetCarsByMake(make);
+            return cars.Select(c => MapHelper.MapResponseCarToDto(c));
+        }
+
+        public IEnumerable<ResponseCarDto> GetCarsByGarageId(int? carByGarageId)
+        {
+            var cars = _carRepo.GetCarsByGarageId(carByGarageId);
+            return cars.Select(c => MapHelper.MapResponseCarToDto(c));
+        }
+
+        public IEnumerable<ResponseCarDto> GetCarsFromYearToYear(int? fromYear, int? toYear)
+        {
+            var cars = _carRepo.GetCarsFromYearToYear(fromYear,toYear);
             return cars.Select(c => MapHelper.MapResponseCarToDto(c));
         }
 
@@ -57,7 +90,7 @@ namespace car_management_backend.Services
             {
                 car.Make = carDto.Make;
                 car.Model = carDto.Model;
-                car.ProductionYear = DateTime.ParseExact(carDto.ProductionYear.ToString(),"yyyymmdd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                car.ProductionYear = carDto.ProductionYear;
                 car.LicensePlate = carDto.LicensePlate;
                 car.CarGarageId = carDto.GarageIds.FirstOrDefault();
                 _carRepo.UpdateCar(car);

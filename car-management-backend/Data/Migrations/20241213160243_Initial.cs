@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace car_management_backend.Migrations
+namespace car_management_backend.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -35,7 +35,7 @@ namespace car_management_backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductionYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductionYear = table.Column<int>(type: "int", nullable: false),
                     LicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarGarageId = table.Column<int>(type: "int", nullable: false)
                 },

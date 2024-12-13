@@ -2,6 +2,7 @@
 using car_management_backend.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Runtime.ConstrainedExecution;
 
 namespace car_management_backend.Data.Repositories
 {
@@ -19,6 +20,33 @@ namespace car_management_backend.Data.Repositories
             return _dbContext.Cars
                 .AsNoTracking()
                 .Include(c => c.Garage)
+                .ToList();
+        }
+
+        public IEnumerable<Car> GetCarsByMake(string? make)
+        {
+            return _dbContext.Cars
+                .Include(c => c.Garage)
+                .Where(c => c.Make == make)
+                .ToList();
+        }
+
+        public IEnumerable<Car> GetCarsByGarageId(int? carByGarageid)
+        {
+            return _dbContext.Cars
+                .Include(c => c.Garage)
+                .Where(c => c.CarGarageId == carByGarageid)
+                .ToList();
+        }
+
+        public IEnumerable<Car> GetCarsFromYearToYear(int? fromYear, int? toYear)
+        {
+            return _dbContext.Cars              
+                .Include(c => c.Garage)
+                .Where(c => 
+                        c.ProductionYear >= fromYear && 
+                         c.ProductionYear <= toYear 
+                )
                 .ToList();
         }
 

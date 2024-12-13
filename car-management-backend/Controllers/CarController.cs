@@ -22,9 +22,9 @@ namespace car_management_backend.Controllers
         [HttpGet]
         [SwaggerResponse(200, "Resource found")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<ResponseCarDto>> GetAllCars()
+        public async Task<ActionResult<ResponseCarDto>> GetAllCars([FromQuery] string? carMake, [FromQuery] int garageId, [FromQuery] int fromYear, [FromQuery] int toYear)
         {
-            var result = _carService.GetAllCars();
+            var result = _carService.GetAllCars(carMake, (int)garageId, (int)fromYear, (int)toYear);
             return Ok(result);
         }
 
