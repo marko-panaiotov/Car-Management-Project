@@ -26,9 +26,9 @@ namespace car_management_backend.Controllers
         [SwaggerResponse(200, "Resource found")]
         [SwaggerResponse(400, "Bad request")]
 
-        public async Task<ActionResult<ResponseGarageDto>> GetAllGarages()
+        public async Task<ActionResult<ResponseGarageDto>> GetAllGarages([FromQuery] string? city)
         {
-            var result = _garageService.GetAllGarages();
+            var result = _garageService.GetAllGarages(city);
             return Ok(result);
         }
         
@@ -68,6 +68,15 @@ namespace car_management_backend.Controllers
         public async Task<ActionResult<bool>> DeleteGarage( int id)
         {
             _garageService.DeleteGarage(id);
+            return Ok(true);
+        }
+
+        [HttpGet("dailyAvailabilityReport")]
+        [SwaggerResponse(200, "Resource created")]
+        [SwaggerResponse(400, "Bad request")]
+        public async Task<ActionResult<GarageDailyAvailabilityReportDto>> DailyAvailabilityReport([FromQuery] int? garageId, [FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+        {
+            _garageService.DailyAvailabilityReport(garageId, startDate, endDate);
             return Ok(true);
         }
 

@@ -14,10 +14,12 @@ namespace car_management_backend.Services
     public class CarService : ICarService
     {
         private readonly ICarRepository _carRepo;
+        private readonly IGarageRepository _garageRepo;
 
-        public CarService(ICarRepository carRepo)
+        public CarService(ICarRepository carRepo, IGarageRepository garageRepo)
         {
             _carRepo = carRepo;
+            _garageRepo = garageRepo;
         }
 
         public void CreateCar(CreateCarDto carDto)
@@ -28,7 +30,9 @@ namespace car_management_backend.Services
                 Model = carDto.Model,
                 ProductionYear = carDto.ProductionYear,
                 LicensePlate = carDto.LicensePlate,
-                CarGarageId = carDto.GarageIds.FirstOrDefault(),
+                CarGarages = carDto.GarageIds
+                            .Select(garageId => new CarGarage { GarageId = garageId })
+                            .ToList(),
             };
 
             _carRepo.AddCar(car);
@@ -84,20 +88,43 @@ namespace car_management_backend.Services
         public void UpdateCar(int id, UpdateCarDto carDto)
         {
             var car = _carRepo.GetCarById(id);
-            
 
-            if (car != null)
+            car.Make = carDto.Make;
+            car.Model = carDto.Model;
+            car.ProductionYear = carDto.ProductionYear;
+            car.LicensePlate = carDto.LicensePlate;
+
+            foreach (var garageId in carDto.GarageIds)
             {
-                car.Make = carDto.Make;
-                car.Model = carDto.Model;
-                car.ProductionYear = carDto.ProductionYear;
-                car.LicensePlate = carDto.LicensePlate;
-                car.CarGarageId = carDto.GarageIds.FirstOrDefault();
-                _carRepo.UpdateCar(car);
-                _carRepo.SaveChanges();
-                MapHelper.MapUpdateCarToDto(car);
+                var garage = _garageRepo.GetGarageById(garageId);
+                var carGarageToRemove = car.CarGarages.FirstOrDefault(cg => cg.GarageId == garageId);
+
+                if (garage != null)
+                {
+                    if (!car.CarGarages.Any(cg => cg.GarageId == garageId))
+                    {
+                        car.CarGarages.Add(new CarGarage
+                        {
+                            CarId = car.CarId,
+                            GarageId = garageId
+                        });
+                    }
+                    if (carDto.GarageIds.Count() > 1)
+                    {
+                        
+                        car.CarGarages.Remove(carGarageToRemove);
+                    }
+                    if(carDto.GarageIds.Count() == 1)
+                    {
+                        car.CarGarages.FirstOrDefault(cg => cg.GarageId == garageId);
+                    }
+                }
+
             }
-                //_carRepo.UpdateCar(car);
+            _carRepo.UpdateCar(car);
+            _carRepo.SaveChanges();
+
+            MapHelper.MapUpdateCarToDto(car);
 
         }
 

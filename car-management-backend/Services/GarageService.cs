@@ -21,9 +21,21 @@ namespace car_management_backend.Services
             return MapHelper.MapResponseGarageToDto(garages);
         }
 
-        public IEnumerable<ResponseGarageDto> GetAllGarages()
+        public IEnumerable<ResponseGarageDto> GetAllGarages(string? city)
         {
+
+            if (city != null)
+            {
+                return GetGaragesByCity(city);
+            }
+
             var garages = _garageRepo.GetAllGarages();
+            return garages.Select(c => MapHelper.MapResponseGarageToDto(c));
+        }
+
+        public IEnumerable<ResponseGarageDto> GetGaragesByCity(string? city)
+        {
+            var garages = _garageRepo.GetGaragesByCity(city);
             return garages.Select(c => MapHelper.MapResponseGarageToDto(c));
         }
 
@@ -58,13 +70,22 @@ namespace car_management_backend.Services
                 _garageRepo.SaveChanges();
                 MapHelper.MapUpdateGarageToDto(garage);
             }
-            //_carRepo.UpdateCar(car);
         }
 
         public void DeleteGarage(int id)
         {
             _garageRepo.DeleteGarage(id);
             _garageRepo.SaveChanges();
+        }
+
+        public IEnumerable<ResponseGarageDto> GetAllGarages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<GarageDailyAvailabilityReportDto> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

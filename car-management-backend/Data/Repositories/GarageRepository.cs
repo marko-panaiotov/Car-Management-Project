@@ -15,8 +15,19 @@ namespace car_management_backend.Data.Repositories
 
         public IEnumerable<Garage> GetAllGarages()
         {
-            return _dbContext.Garages.ToList();
+            return _dbContext.Garages
+                .Include(c => c.CarGarages)
+                .ToList();
         }
+
+        public IEnumerable<Garage> GetGaragesByCity(string? city) 
+        { 
+             return _dbContext.Garages
+               .Include(g => g.CarGarages)
+               .Where(g => g.City == city)
+               .ToList();
+        }
+
         public Garage GetGarageById(int id)
         {
             return _dbContext.Garages.Find(id);
@@ -39,6 +50,11 @@ namespace car_management_backend.Data.Repositories
         public void SaveChanges()
         {
             _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<Garage> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

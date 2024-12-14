@@ -14,6 +14,8 @@ namespace car_management_backend.Data.Entities
 
         public int Capacity { get; set; }
         public string City { get; set; } = null!;
+        public ICollection<CarGarage> CarGarages { get; set; } = new List<CarGarage>();
+
     }
 }
 

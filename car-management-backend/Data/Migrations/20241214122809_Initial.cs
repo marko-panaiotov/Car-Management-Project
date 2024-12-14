@@ -12,6 +12,22 @@ namespace car_management_backend.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    CarId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductionYear = table.Column<int>(type: "int", nullable: false),
+                    LicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.CarId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Garages",
                 columns: table => new
                 {
@@ -28,26 +44,27 @@ namespace car_management_backend.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "CarGarages",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductionYear = table.Column<int>(type: "int", nullable: false),
-                    LicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CarGarageId = table.Column<int>(type: "int", nullable: false)
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    GarageId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.CarId);
+                    table.PrimaryKey("PK_CarGarages", x => new { x.CarId, x.GarageId });
                     table.ForeignKey(
-                        name: "FK_Cars_Garages_CarGarageId",
-                        column: x => x.CarGarageId,
+                        name: "FK_CarGarages_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "CarId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarGarages_Garages_GarageId",
+                        column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "GarageId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,9 +98,9 @@ namespace car_management_backend.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CarGarageId",
-                table: "Cars",
-                column: "CarGarageId");
+                name: "IX_CarGarages_GarageId",
+                table: "CarGarages",
+                column: "GarageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Maintenenaces_CarId",
@@ -99,6 +116,9 @@ namespace car_management_backend.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CarGarages");
+
             migrationBuilder.DropTable(
                 name: "Maintenenaces");
 

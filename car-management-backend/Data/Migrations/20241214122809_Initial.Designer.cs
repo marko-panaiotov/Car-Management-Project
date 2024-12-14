@@ -12,7 +12,7 @@ using car_management_backend.Data;
 namespace car_management_backend.Data.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241213160243_Initial")]
+    [Migration("20241214122809_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,9 +33,6 @@ namespace car_management_backend.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
 
-                    b.Property<int>("CarGarageId")
-                        .HasColumnType("int");
-
                     b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,9 +50,22 @@ namespace car_management_backend.Data.Migrations
 
                     b.HasKey("CarId");
 
-                    b.HasIndex("CarGarageId");
-
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("car_management_backend.Data.Entities.CarGarage", b =>
+                {
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GarageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarId", "GarageId");
+
+                    b.HasIndex("GarageId");
+
+                    b.ToTable("CarGarages");
                 });
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
@@ -124,13 +134,21 @@ namespace car_management_backend.Data.Migrations
                     b.ToTable("Maintenenaces");
                 });
 
-            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
+            modelBuilder.Entity("car_management_backend.Data.Entities.CarGarage", b =>
                 {
-                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
-                        .WithMany()
-                        .HasForeignKey("CarGarageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("car_management_backend.Data.Entities.Car", "Car")
+                        .WithMany("CarGarages")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
+                        .WithMany("CarGarages")
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
 
                     b.Navigation("Garage");
                 });
@@ -152,6 +170,16 @@ namespace car_management_backend.Data.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("Garage");
+                });
+
+            modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
+                {
+                    b.Navigation("CarGarages");
+                });
+
+            modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
+                {
+                    b.Navigation("CarGarages");
                 });
 #pragma warning restore 612, 618
         }

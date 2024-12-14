@@ -17,42 +17,55 @@ namespace car_management_backend.Data.Repositories
 
         public IEnumerable<Car> GetAllCars()
         {
+            /* return _dbContext.Cars
+                 .AsNoTracking()
+                 .Include(c => c.CarGarages)
+                 .ToList();*/
+
             return _dbContext.Cars
-                .AsNoTracking()
-                .Include(c => c.Garage)
+                .Include(c => c.CarGarages)
+                .ThenInclude(cg => cg.Garage)
                 .ToList();
         }
 
         public IEnumerable<Car> GetCarsByMake(string? make)
         {
             return _dbContext.Cars
-                .Include(c => c.Garage)
+                .Include(c => c.CarGarages)
+                .ThenInclude(cg => cg.Garage)
                 .Where(c => c.Make == make)
                 .ToList();
         }
 
         public IEnumerable<Car> GetCarsByGarageId(int? carByGarageid)
         {
+            /*  return _dbContext.Cars
+                  .Include(c => c.Garage)
+                  .Where(c => c.CarGarageId == carByGarageid)
+                  .ToList();*/
+
             return _dbContext.Cars
-                .Include(c => c.Garage)
-                .Where(c => c.CarGarageId == carByGarageid)
-                .ToList();
+                    .Include(c => c.CarGarages)
+                    .ThenInclude(cg => cg.Garage)
+                    .Where(c => c.CarGarages.Any(cg => cg.GarageId == carByGarageid))
+                    .ToList();
         }
 
         public IEnumerable<Car> GetCarsFromYearToYear(int? fromYear, int? toYear)
         {
             return _dbContext.Cars              
-                .Include(c => c.Garage)
+                .Include(c => c.CarGarages)
+                .ThenInclude(cg => cg.Garage)
                 .Where(c => 
-                        c.ProductionYear >= fromYear && 
-                         c.ProductionYear <= toYear 
+                        c.ProductionYear >= fromYear.Value && 
+                         c.ProductionYear <= toYear.Value 
                 )
                 .ToList();
         }
 
         public Car GetCarById(int id)
         {
-            return _dbContext.Cars.Include(c => c.Garage).FirstOrDefault(c => c.CarId == id);
+            return _dbContext.Cars.Include(c => c.CarGarages).FirstOrDefault(c => c.CarId == id);
         }
 
         public Car AddCar(Car car)
