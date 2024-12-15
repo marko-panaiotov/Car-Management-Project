@@ -36,6 +36,25 @@ namespace car_management_backend.Services
             };
 
             _carRepo.AddCar(car);
+
+            foreach (var garageId in carDto.GarageIds)
+            {
+                var garage = _garageRepo.GetGarageById(garageId);
+                if (garage == null)
+                {
+                    throw new InvalidOperationException($"Garage with ID {garageId} does not exist.");
+                }
+
+                if (garage.Capacity <= 0)
+                {
+                    throw new InvalidOperationException($"Garage with ID {garageId} is at full capacity.");
+                }
+
+                // Decrement the available capacity
+                garage.Capacity--;
+                _garageRepo.UpdateGarage(garage);
+                _garageRepo.SaveChanges();
+            }
             _carRepo.SaveChanges();
             MapHelper.MapCreateCarToDto(car);
         }
@@ -130,6 +149,27 @@ namespace car_management_backend.Services
 
         public void DeleteCar(int id)
         {
+            var car = _carRepo.GetCarById(id);
+
+            if (car == null)
+            {
+                throw new InvalidOperationException($"Car with ID {id} does not exist.");
+            }
+
+            foreach (var carGarage in car.CarGarages)
+            {
+                var garage = _garageRepo.GetGarageById(carGarage.GarageId);
+
+                if (garage == null)
+                {
+                    throw new InvalidOperationException($"Garage with ID {carGarage.GarageId} does not exist.");
+                }
+
+                garage.Capacity++;
+                _garageRepo.UpdateGarage(garage);
+            }
+            _garageRepo.SaveChanges();
+
             _carRepo.DeleteCar(id);
             _carRepo.SaveChanges();
         }
