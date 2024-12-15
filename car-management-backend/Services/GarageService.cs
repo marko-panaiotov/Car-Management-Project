@@ -1,15 +1,19 @@
 ﻿
 using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Entities;
+using car_management_backend.Data.Repositories;
 using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Utilities.Helpers;
+using System.Globalization;
 
 namespace car_management_backend.Services
 {
     public class GarageService : IGarageService
     {
         private readonly IGarageRepository _garageRepo;
+        private static int _apiGarageCallCount = 0;
+        private static DateTime dateTimeNow = DateTime.Now;
         public GarageService(IGarageRepository garageRepo)
         {
             _garageRepo = garageRepo;
@@ -17,6 +21,9 @@ namespace car_management_backend.Services
 
         public ResponseGarageDto GetGarage(int id)
         {
+          
+            _apiGarageCallCount++;
+           
             var garages = _garageRepo.GetGarageById(id);
             return MapHelper.MapResponseGarageToDto(garages);
         }
@@ -26,21 +33,25 @@ namespace car_management_backend.Services
 
             if (city != null)
             {
+                _apiGarageCallCount++;
                 return GetGaragesByCity(city);
             }
 
             var garages = _garageRepo.GetAllGarages();
+            _apiGarageCallCount++;
             return garages.Select(c => MapHelper.MapResponseGarageToDto(c));
         }
 
         public IEnumerable<ResponseGarageDto> GetGaragesByCity(string? city)
         {
             var garages = _garageRepo.GetGaragesByCity(city);
+            _apiGarageCallCount++;
             return garages.Select(c => MapHelper.MapResponseGarageToDto(c));
         }
 
         public void CreateGarage(CreateGarageDto garageDto)
         {
+            _apiGarageCallCount++;
             var garage = new Garage
             {
                 Name = garageDto.Name,
@@ -50,11 +61,13 @@ namespace car_management_backend.Services
             };
             _garageRepo.AddGarage(garage);
             _garageRepo.SaveChanges();
+            
             MapHelper.MapCreateGarageToDto(garage);
         }
 
         public void UpdateGarage(int id, UpdateGarageDto garageDto)
         {
+            _apiGarageCallCount++;
             Garage garageId = new Garage();
             garageId.GarageId = id;
             var garage = _garageRepo.GetGarageById(garageId.GarageId);
@@ -74,18 +87,26 @@ namespace car_management_backend.Services
 
         public void DeleteGarage(int id)
         {
+            _apiGarageCallCount++;
             _garageRepo.DeleteGarage(id);
             _garageRepo.SaveChanges();
         }
 
-        public IEnumerable<ResponseGarageDto> GetAllGarages()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<GarageDailyAvailabilityReportDto> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            throw new NotImplementedException();
+            _apiGarageCallCount++;
+            var dailyAvailabilityReports = _garageRepo.DailyAvailabilityReport(garageId, startDate, endDate);
+
+            var reportDtos = dailyAvailabilityReports.Select(dailyAvailability => new GarageDailyAvailabilityReportDto
+            {
+                Date = dailyAvailability.Date,                
+                Requests = _apiGarageCallCount,         
+                AvailableCapacity = dailyAvailability.AvailableCapacity 
+            }).ToList();
+
+            return reportDtos;
         }
+
+   
     }
 }

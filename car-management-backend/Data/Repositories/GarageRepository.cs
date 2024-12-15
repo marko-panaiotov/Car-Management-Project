@@ -1,6 +1,7 @@
 ﻿using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace car_management_backend.Data.Repositories
 {
@@ -20,12 +21,12 @@ namespace car_management_backend.Data.Repositories
                 .ToList();
         }
 
-        public IEnumerable<Garage> GetGaragesByCity(string? city) 
-        { 
-             return _dbContext.Garages
-               .Include(g => g.CarGarages)
-               .Where(g => g.City == city)
-               .ToList();
+        public IEnumerable<Garage> GetGaragesByCity(string? city)
+        {
+            return _dbContext.Garages
+              .Include(g => g.CarGarages)
+              .Where(g => g.City == city)
+              .ToList();
         }
 
         public Garage GetGarageById(int id)
@@ -52,9 +53,37 @@ namespace car_management_backend.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Garage> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
+        public IEnumerable<GarageReport> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            throw new NotImplementedException();
+
+         /*   return _dbContext.GarageReports
+                .Include(c => c.Garage)
+                .Where(g => g.GarageId == garageId &&
+                        g.Date >= startDate.Value &&
+                         g.Date <= endDate.Value)
+                .ToList();*/
+
+
+                var stats = _dbContext.GarageReports
+                .Where(r => r.Date >= startDate && r.Date <= endDate)
+                .GroupBy(r => new { r.Date, r.GarageId })
+                .Select(g => new GarageReport
+                 {
+                     GarageId = g.Key.GarageId,
+                     Date = g.Key.Date,
+                     AvailableCapacity = _dbContext.GarageReports
+                     .Where(s => s.Id == g.Key.GarageId)
+                     .FirstOrDefault().AvailableCapacity - g.Sum(r => r.Requests)
+                     })
+                    .ToList();
+
+            return stats;
+            //throw new NotImplementedException();
+
         }
+
+
+
+
     }
 }

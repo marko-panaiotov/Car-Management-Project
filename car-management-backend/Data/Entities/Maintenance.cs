@@ -15,7 +15,7 @@ namespace car_management_backend.Data.Entities
 
         public string ServiceType { get; set; } = null!;
 
-        public DateTime ScheduledTime { get; set; }
+        public string ScheduledTime { get; set; }
 
         public int GarageId { get; set; }
         public Garage Garage { get; set; } = null!;

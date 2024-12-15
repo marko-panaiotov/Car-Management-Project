@@ -14,8 +14,9 @@ namespace car_management_backend.Data
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<Garage> Garages { get; set; }
-        public DbSet<Maintenance> Maintenenaces { get; set; }
-        public DbSet<CarGarage> CarGarages { get; set; } = null!;
+        public DbSet<Maintenance> Maintenances { get; set; }
+        public DbSet<GarageReport> GarageReports { get; set; }
+       // public DbSet<CarGarage> CarGarages { get; set; } = null!;
 
         public CarManagementDbContext(DbContextOptions<CarManagementDbContext> options) : base(options)
         {
@@ -25,23 +26,42 @@ namespace car_management_backend.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Maintenance>()
+            /*  modelBuilder.Entity<Maintenance>()
+              .HasOne(m => m.CarGarages)
+              .WithMany()
+              .HasForeignKey(m => m.CarId)
+              .OnDelete(DeleteBehavior.Restrict);
+
+              modelBuilder.Entity<Maintenance>()
+              .HasOne(m => m.CarGarages)
+              .WithMany()
+              .HasForeignKey(m => m.GarageId)
+              .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<GarageReport>()
             .HasOne(m => m.Garage)
-            .WithMany()
-            .HasForeignKey(m => m.GarageId)
+                .WithMany()
+                .HasForeignKey(m => m.GarageId)
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Maintenance>()
-            .HasOne(m => m.Car)
-            .WithMany()
-            .HasForeignKey(m => m.CarId)
-            .OnDelete(DeleteBehavior.Restrict);
+             .HasOne(m => m.Car)
+                 .WithMany(c => c.Maintenances)
+                 .HasForeignKey(m => m.CarId)
+             .OnDelete(DeleteBehavior.Restrict);
 
-            /*modelBuilder.Entity<Car>()
-            .HasOne(c => c.Garage)
-            .WithMany()
-            .HasForeignKey(c => c.CarGarageId)
-            .OnDelete(DeleteBehavior.Restrict);*/
+            modelBuilder.Entity<Maintenance>()
+                .HasOne(m => m.Garage)
+                .WithMany(g => g.Maintenances)
+                .HasForeignKey(m => m.GarageId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            /* modelBuilder.Entity<Car>()
+             .HasOne(c => c.Garage)
+             .WithMany()
+             .HasForeignKey(c => c.CarGarageId)
+             .OnDelete(DeleteBehavior.Restrict);*/
 
             modelBuilder.Entity<CarGarage>()
                 .HasKey(cg => new { cg.CarId, cg.GarageId });

@@ -1,7 +1,10 @@
 ﻿using car_management_backend.Data.Dtos.CarDtos;
 using car_management_backend.Data.Dtos.GarageDtos;
+using car_management_backend.Data.Dtos.MaintenanceDtos;
 using car_management_backend.Data.Entities;
+using Microsoft.AspNetCore.Http;
 using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace car_management_backend.Utilities.Helpers
 {
@@ -82,6 +85,56 @@ namespace car_management_backend.Utilities.Helpers
                 Location = garage.Location,
                 City = garage.City,
                 Capacity = garage.Capacity
+            };
+        }
+
+        public static GarageDailyAvailabilityReportDto MapGarageDailyAvailabilityReportToDto(GarageReport garageReport)
+        {
+
+            return new GarageDailyAvailabilityReportDto()
+            {
+                Date = garageReport.Date,
+                Requests = garageReport.Requests,
+                AvailableCapacity = garageReport.AvailableCapacity,
+            };
+
+        }
+
+        public static CreateMaintenanceDto MapCreateMaintenanceToDto(Maintenance maintenance)
+        {
+            return new CreateMaintenanceDto()
+            {
+                CarId = maintenance.Car.CarId,
+                ServiceType = maintenance.ServiceType,
+                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
+                GarageId = maintenance.Garage.GarageId
+
+            };
+        }
+
+        public static UpdateMaintenanceDto MapUpdateMaintenanceToDto(Maintenance maintenance)
+        {
+            return new UpdateMaintenanceDto()
+            {
+                CarId = maintenance.Car.CarId,
+                ServiceType = maintenance.ServiceType,
+                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
+                GarageId = maintenance.Garage.GarageId
+
+            };
+        }
+
+        public static ResponseMaintenanceDto MapResponseMaintenanceToDto(Maintenance maintenance)
+        {
+            return new ResponseMaintenanceDto()
+            {
+                Id= maintenance.Id,
+                CarId = maintenance.Car.CarId,
+                CarName = maintenance.Car.Make+" "+ maintenance.Car.Model,
+                ServiceType = maintenance.ServiceType,
+                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
+                GarageId = maintenance.Garage.GarageId,
+                GarageName = maintenance.Garage.Name
             };
         }
 

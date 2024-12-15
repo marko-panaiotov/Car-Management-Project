@@ -16,11 +16,8 @@ namespace car_management_backend.Data.Entities
         public int ProductionYear {  get; set; }
      
         public string LicensePlate { get; set; } = null!;
-
-       // public int CarGarageId { get; set; }
-        //public Garage Garage { get; set; } = null!;
-
         public ICollection<CarGarage> CarGarages { get; set; } = new List<CarGarage>();
+        public ICollection<Maintenance> Maintenances { get; set; } = new List<Maintenance>();
 
     }
 }

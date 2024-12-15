@@ -44,7 +44,7 @@ namespace car_management_backend.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarGarages",
+                name: "CarGarage",
                 columns: table => new
                 {
                     CarId = table.Column<int>(type: "int", nullable: false),
@@ -52,15 +52,15 @@ namespace car_management_backend.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarGarages", x => new { x.CarId, x.GarageId });
+                    table.PrimaryKey("PK_CarGarage", x => new { x.CarId, x.GarageId });
                     table.ForeignKey(
-                        name: "FK_CarGarages_Cars_CarId",
+                        name: "FK_CarGarage_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "CarId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CarGarages_Garages_GarageId",
+                        name: "FK_CarGarage_Garages_GarageId",
                         column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "GarageId",
@@ -68,7 +68,29 @@ namespace car_management_backend.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Maintenenaces",
+                name: "GarageReports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Requests = table.Column<int>(type: "int", nullable: false),
+                    AvailableCapacity = table.Column<int>(type: "int", nullable: false),
+                    GarageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GarageReports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GarageReports_Garages_GarageId",
+                        column: x => x.GarageId,
+                        principalTable: "Garages",
+                        principalColumn: "GarageId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Maintenances",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -76,21 +98,21 @@ namespace car_management_backend.Data.Migrations
                     CarId = table.Column<int>(type: "int", nullable: false),
                     CarName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ServiceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ScheduledTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ScheduledTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GarageId = table.Column<int>(type: "int", nullable: false),
                     GarageName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Maintenenaces", x => x.Id);
+                    table.PrimaryKey("PK_Maintenances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Maintenenaces_Cars_CarId",
+                        name: "FK_Maintenances_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "CarId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Maintenenaces_Garages_GarageId",
+                        name: "FK_Maintenances_Garages_GarageId",
                         column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "GarageId",
@@ -98,18 +120,23 @@ namespace car_management_backend.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarGarages_GarageId",
-                table: "CarGarages",
+                name: "IX_CarGarage_GarageId",
+                table: "CarGarage",
                 column: "GarageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Maintenenaces_CarId",
-                table: "Maintenenaces",
+                name: "IX_GarageReports_GarageId",
+                table: "GarageReports",
+                column: "GarageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenances_CarId",
+                table: "Maintenances",
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Maintenenaces_GarageId",
-                table: "Maintenenaces",
+                name: "IX_Maintenances_GarageId",
+                table: "Maintenances",
                 column: "GarageId");
         }
 
@@ -117,10 +144,13 @@ namespace car_management_backend.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CarGarages");
+                name: "CarGarage");
 
             migrationBuilder.DropTable(
-                name: "Maintenenaces");
+                name: "GarageReports");
+
+            migrationBuilder.DropTable(
+                name: "Maintenances");
 
             migrationBuilder.DropTable(
                 name: "Cars");

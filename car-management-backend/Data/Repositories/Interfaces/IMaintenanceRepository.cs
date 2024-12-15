@@ -7,11 +7,14 @@ namespace car_management_backend.Data.Repositories.Interfaces
     public interface IMaintenanceRepository
     {
         Maintenance GetMaintenaceById(int id);
-        IEnumerable<Maintenance> GetAllMaintenaces(int? carId, int? garageId, DateTime? startDate, DateTime? endDate);
-        // IEnumerable<ResponseGarageDto> GetGaragesByCity(string? city);
+        IEnumerable<Maintenance> GetAllMaintenaces();
+        IEnumerable<Maintenance> GetMaintenaceByCarId(int? carId);
+        IEnumerable<Maintenance> GetMaintenaceByGarageId(int? garageId);
+        IEnumerable<Maintenance> GetMaintenanceFromYearToYear(DateTime? startDate, DateTime? endDate);
         IEnumerable<Maintenance> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate);
-        void AddNewMaintenace(Maintenance maintenanceDto);
-        void UpdateMaintenace(int id, Maintenance maintenanceDto);
+        Maintenance AddNewMaintenace(Maintenance maintenance);
+        void UpdateMaintenace(Maintenance maintenance);
         void DeleteMaintenace(int id);
+        void SaveChanges();
     }
 }

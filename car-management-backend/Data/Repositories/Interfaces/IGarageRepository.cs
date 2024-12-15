@@ -6,7 +6,7 @@ namespace car_management_backend.Data.Repositories.Interfaces
     {
         IEnumerable<Garage> GetAllGarages();
         IEnumerable<Garage> GetGaragesByCity(string? city);
-        IEnumerable<Garage> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate);
+        IEnumerable<GarageReport> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate);
         Garage GetGarageById(int id);
         Garage AddGarage(Garage garage);
         void UpdateGarage(Garage garage);

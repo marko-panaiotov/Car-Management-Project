@@ -1,38 +1,101 @@
 ﻿using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace car_management_backend.Data.Repositories
 {
     public class MaintenanceRepository : IMaintenanceRepository
     {
-        public void AddNewMaintenace(Maintenance maintenanceDto)
+        private readonly CarManagementDbContext _dbContext;
+
+        public MaintenanceRepository(CarManagementDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public IEnumerable<Maintenance> GetAllMaintenaces()
+        {
+            return _dbContext.Maintenances
+                .Include(m => m.Car) // Join with Car table
+                .Include(m => m.Garage)
+                .Select(m=> new Maintenance 
+                { 
+                    ServiceType = m.ServiceType,
+                    ScheduledTime = m.ScheduledTime,
+                    GarageName = m.Garage.Name,
+                    CarName = m.Car.Make,
+
+                })
+                     .ToList();
+            // throw new NotImplementedException();
         }
 
-        public void DeleteMaintenace(int id)
+        public IEnumerable<Maintenance> GetMaintenaceByCarId(int? carId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Maintenances
+               .Include(c => c.Car)
+               .Include(g => g.Garage)
+               .Where(c => c.Car.CarId == carId)
+               .ToList();
         }
 
-        public IEnumerable<Maintenance> GetAllMaintenaces(int? carId, int? garageId, DateTime? startDate, DateTime? endDate)
+        public IEnumerable<Maintenance> GetMaintenaceByGarageId(int? garageId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Maintenances
+               .Include(c => c.Car)
+               .Include(g => g.Garage)
+               .Where(c => c.Garage.GarageId==garageId)
+               .ToList();
         }
 
         public Maintenance GetMaintenaceById(int id)
         {
+            return _dbContext.Maintenances
+                .Include(c => c.Car)
+                .Include(g=>g.Garage)
+                .FirstOrDefault(c => c.Id == id);
+        }
+
+        public IEnumerable<Maintenance> GetMaintenanceFromYearToYear(DateTime? startDate, DateTime? endDate)
+        {
+           /* return _dbContext.Maintenances
+                 .Include(c => c.Car)
+                 .Include (g => g.Garage)   
+                 .Where(c =>
+                         c.Car.ProductionYear >= startDate &&
+                          c.Car.ProductionYear <= endDate
+                 )
+                 .ToList();*/
             throw new NotImplementedException();
         }
 
+        public Maintenance AddNewMaintenace(Maintenance maintenance)
+        {
+            _dbContext.Maintenances.Add(maintenance);
+            return maintenance;
+        }
+
+        public void UpdateMaintenace(Maintenance maintenance)
+        {
+            _dbContext.Maintenances.Update(maintenance);
+        }
+
+
+        public void DeleteMaintenace(int id)
+        {
+            var maintenanceToDelete = _dbContext.Maintenances
+               .FirstOrDefault(c => c.Id == id);
+            _dbContext.Maintenances.Remove(maintenanceToDelete);
+        }
+    
         public IEnumerable<Maintenance> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateMaintenace(int id, Maintenance maintenanceDto)
+        public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -12,7 +12,7 @@ using car_management_backend.Data;
 namespace car_management_backend.Data.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241214122809_Initial")]
+    [Migration("20241215121308_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -65,7 +65,7 @@ namespace car_management_backend.Data.Migrations
 
                     b.HasIndex("GarageId");
 
-                    b.ToTable("CarGarages");
+                    b.ToTable("CarGarage");
                 });
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
@@ -96,6 +96,33 @@ namespace car_management_backend.Data.Migrations
                     b.ToTable("Garages");
                 });
 
+            modelBuilder.Entity("car_management_backend.Data.Entities.GarageReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AvailableCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GarageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Requests")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GarageId");
+
+                    b.ToTable("GarageReports");
+                });
+
             modelBuilder.Entity("car_management_backend.Data.Entities.Maintenance", b =>
                 {
                     b.Property<int>("Id")
@@ -118,8 +145,9 @@ namespace car_management_backend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ScheduledTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ScheduledTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceType")
                         .IsRequired()
@@ -131,7 +159,7 @@ namespace car_management_backend.Data.Migrations
 
                     b.HasIndex("GarageId");
 
-                    b.ToTable("Maintenenaces");
+                    b.ToTable("Maintenances");
                 });
 
             modelBuilder.Entity("car_management_backend.Data.Entities.CarGarage", b =>
@@ -153,16 +181,27 @@ namespace car_management_backend.Data.Migrations
                     b.Navigation("Garage");
                 });
 
+            modelBuilder.Entity("car_management_backend.Data.Entities.GarageReport", b =>
+                {
+                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
+                        .WithMany()
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Garage");
+                });
+
             modelBuilder.Entity("car_management_backend.Data.Entities.Maintenance", b =>
                 {
                     b.HasOne("car_management_backend.Data.Entities.Car", "Car")
-                        .WithMany()
+                        .WithMany("Maintenances")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
-                        .WithMany()
+                        .WithMany("Maintenances")
                         .HasForeignKey("GarageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -175,11 +214,15 @@ namespace car_management_backend.Data.Migrations
             modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>
                 {
                     b.Navigation("CarGarages");
+
+                    b.Navigation("Maintenances");
                 });
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Garage", b =>
                 {
                     b.Navigation("CarGarages");
+
+                    b.Navigation("Maintenances");
                 });
 #pragma warning restore 612, 618
         }
