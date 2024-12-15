@@ -41,20 +41,20 @@ namespace car_management_backend.Data
             modelBuilder.Entity<GarageReport>()
             .HasOne(m => m.Garage)
                 .WithMany()
-                .HasForeignKey(m => m.GarageId)
-            .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(m => m.GarageId);
+           // .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Maintenance>()
              .HasOne(m => m.Car)
                  .WithMany(c => c.Maintenances)
-                 .HasForeignKey(m => m.CarId)
-             .OnDelete(DeleteBehavior.Restrict);
+                 .HasForeignKey(m => m.CarId);
+            // .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Maintenance>()
                 .HasOne(m => m.Garage)
                 .WithMany(g => g.Maintenances)
-                .HasForeignKey(m => m.GarageId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(m => m.GarageId);
+                //.OnDelete(DeleteBehavior.Restrict);
 
 
             /* modelBuilder.Entity<Car>()

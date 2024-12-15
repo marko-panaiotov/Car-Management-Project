@@ -6,6 +6,7 @@ using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Utilities.Helpers;
 using System.Data.Common;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 
@@ -45,15 +46,14 @@ namespace car_management_backend.Services
                     throw new InvalidOperationException($"Garage with ID {garageId} does not exist.");
                 }
 
-                if (garage.Capacity <= 0)
+               /* if (garage.Capacity >= 0)
                 {
-                    throw new InvalidOperationException($"Garage with ID {garageId} is at full capacity.");
+                    garage.Capacity--;
+                   
                 }
-
-                // Decrement the available capacity
-                garage.Capacity--;
                 _garageRepo.UpdateGarage(garage);
-                _garageRepo.SaveChanges();
+
+                _garageRepo.SaveChanges();*/
             }
             _carRepo.SaveChanges();
             MapHelper.MapCreateCarToDto(car);
@@ -117,6 +117,7 @@ namespace car_management_backend.Services
             {
                 var garage = _garageRepo.GetGarageById(garageId);
                 var carGarageToRemove = car.CarGarages.FirstOrDefault(cg => cg.GarageId == garageId);
+                //var carGarageCapacitry = car.CarGarages.Select(cg => cg.Garage.Capacity).ToList();
 
                 if (garage != null)
                 {
@@ -127,19 +128,37 @@ namespace car_management_backend.Services
                             CarId = car.CarId,
                             GarageId = garageId
                         });
+                       
+                       /* if (garage.Capacity <= carGarageCapacitry.Capacity)
+                        {
+                            carGarageCapacitry.Capacity--;
+                            //garage.Capacity--;
+
+                        }
+
+                        //garage.Capacity--;
+                        _garageRepo.UpdateGarage(garage);*/
                     }
-                    if (carDto.GarageIds.Count() > 1)
+                    if (carDto.GarageIds.Count() >= 1)
                     {
-                        
+                       /* if (garage.Capacity >= 0)
+                        {
+                            garage.Capacity++;
+
+                        }
+                        _garageRepo.UpdateGarage(garage);*/
                         car.CarGarages.Remove(carGarageToRemove);
                     }
-                    if(carDto.GarageIds.Count() == 1)
+                    if (carDto.GarageIds.Count() == 1)
                     {
                         car.CarGarages.FirstOrDefault(cg => cg.GarageId == garageId);
+
                     }
+                    //_garageRepo.SaveChanges();
                 }
 
             }
+
             _carRepo.UpdateCar(car);
             _carRepo.SaveChanges();
 
@@ -156,7 +175,7 @@ namespace car_management_backend.Services
                 throw new InvalidOperationException($"Car with ID {id} does not exist.");
             }
 
-            foreach (var carGarage in car.CarGarages)
+            /*foreach (var carGarage in car.CarGarages)
             {
                 var garage = _garageRepo.GetGarageById(carGarage.GarageId);
 
@@ -165,10 +184,15 @@ namespace car_management_backend.Services
                     throw new InvalidOperationException($"Garage with ID {carGarage.GarageId} does not exist.");
                 }
 
-                garage.Capacity++;
+                if (garage.Capacity >= 0)
+                {
+                    garage.Capacity++;
+                    
+                }
                 _garageRepo.UpdateGarage(garage);
             }
-            _garageRepo.SaveChanges();
+            
+            _garageRepo.SaveChanges();*/
 
             _carRepo.DeleteCar(id);
             _carRepo.SaveChanges();
