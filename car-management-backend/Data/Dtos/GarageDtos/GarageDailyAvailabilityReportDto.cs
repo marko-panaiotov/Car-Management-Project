@@ -14,7 +14,4 @@ namespace car_management_backend.Data.Dtos.GarageDtos
         public int Requests { get; set; }
         public int AvailableCapacity { get; set; }
     }
-
-   
-
 }

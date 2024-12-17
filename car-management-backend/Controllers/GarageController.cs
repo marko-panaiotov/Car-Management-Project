@@ -76,8 +76,8 @@ namespace car_management_backend.Controllers
         [SwaggerResponse(400, "Bad request")]
         public async Task<ActionResult<GarageDailyAvailabilityReportDto>> DailyAvailabilityReport([FromQuery] int? garageId, [FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
         {
-            _garageService.DailyAvailabilityReport(garageId, startDate, endDate);
-            return Ok(true);
+            var report = _garageService.DailyAvailabilityReport(garageId, startDate, endDate);
+            return Ok(report);
         }
 
 

@@ -13,7 +13,7 @@ namespace car_management_backend.Data.Repositories
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<Maintenance> GetAllMaintenaces()
+        public IEnumerable<Maintenance> GetAllMaintenances()
         {
             return _dbContext.Maintenances
                 .Include(m => m.Car) // Join with Car table
@@ -22,7 +22,9 @@ namespace car_management_backend.Data.Repositories
                 { 
                     ServiceType = m.ServiceType,
                     ScheduledTime = m.ScheduledTime,
-                    GarageName = m.Garage.Name,
+                    GarageId = m.Garage.GarageId,
+                    GarageName = m.GarageName,
+                    CarId = m.Car.CarId,
                     CarName = m.Car.Make,
 
                 })
@@ -30,7 +32,7 @@ namespace car_management_backend.Data.Repositories
             // throw new NotImplementedException();
         }
 
-        public IEnumerable<Maintenance> GetMaintenaceByCarId(int? carId)
+        public IEnumerable<Maintenance> GetMaintenanceByCarId(int? carId)
         {
             return _dbContext.Maintenances
                .Include(c => c.Car)
@@ -39,7 +41,7 @@ namespace car_management_backend.Data.Repositories
                .ToList();
         }
 
-        public IEnumerable<Maintenance> GetMaintenaceByGarageId(int? garageId)
+        public IEnumerable<Maintenance> GetMaintenanceByGarageId(int? garageId)
         {
             return _dbContext.Maintenances
                .Include(c => c.Car)
@@ -60,7 +62,7 @@ namespace car_management_backend.Data.Repositories
         {
            /* return _dbContext.Maintenances
                  .Include(c => c.Car)
-                 .Include (g => g.Garage)   
+                 .Include(g => g.Garage)
                  .Where(c =>
                          c.Car.ProductionYear >= startDate &&
                           c.Car.ProductionYear <= endDate
@@ -69,19 +71,19 @@ namespace car_management_backend.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Maintenance AddNewMaintenace(Maintenance maintenance)
+        public Maintenance AddNewMaintenance(Maintenance maintenance)
         {
             _dbContext.Maintenances.Add(maintenance);
             return maintenance;
         }
 
-        public void UpdateMaintenace(Maintenance maintenance)
+        public void UpdateMaintenance(Maintenance maintenance)
         {
             _dbContext.Maintenances.Update(maintenance);
         }
 
 
-        public void DeleteMaintenace(int id)
+        public void DeleteMaintenance(int id)
         {
             var maintenanceToDelete = _dbContext.Maintenances
                .FirstOrDefault(c => c.Id == id);

@@ -23,7 +23,7 @@ namespace car_management_backend.Controllers
 
         public async Task<ActionResult<ResponseMaintenanceDto>> GetAllMaintenaces([FromQuery] int? carId, [FromQuery] int? garageId, [FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
         {
-            var result = _maintenanceService.GetAllMaintenaces(carId, garageId, startDate, endDate);
+            var result = _maintenanceService.GetAllMaintenances(carId, garageId, startDate, endDate);
             return Ok(result);
         }
 

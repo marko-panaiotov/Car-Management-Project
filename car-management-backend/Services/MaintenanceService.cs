@@ -34,18 +34,18 @@ namespace car_management_backend.Services
                 ScheduledTime = maintenanceDto.ScheduledTime.ToString("yyyy-mm-dd")
             };
 
-            _maintenanceRepo.AddNewMaintenace(maintenance);
+            _maintenanceRepo.AddNewMaintenance(maintenance);
             _maintenanceRepo.SaveChanges();
             MapHelper.MapCreateMaintenanceToDto(maintenance);
         }
 
         public void DeleteMaintenace(int id)
         {
-            _maintenanceRepo.DeleteMaintenace(id);
+            _maintenanceRepo.DeleteMaintenance(id);
             _maintenanceRepo.SaveChanges();
         }
 
-        public IEnumerable<ResponseMaintenanceDto> GetAllMaintenaces(int? carId, int? garageId, DateTime? startDate, DateTime? endDate)
+        public IEnumerable<ResponseMaintenanceDto> GetAllMaintenances(int? carId, int? garageId, DateTime? startDate, DateTime? endDate)
         {
             if (carId != null || garageId != 0 || startDate != null && endDate != null)
             {
@@ -57,24 +57,25 @@ namespace car_management_backend.Services
                 {
                     return GetMaintenaceByGarageId(garageId);
                 }
-                if (startDate!= null && endDate != null)
+                if (startDate != null && endDate != null)
                 {
-                    return GetMaintenanceFromYearToYear(startDate,endDate);
+                    return GetMaintenanceFromYearToYear(startDate, endDate);
                 }
             }
-            var maintenances = _maintenanceRepo.GetAllMaintenaces();
+
+            var maintenances = _maintenanceRepo.GetAllMaintenances();
             return maintenances.Select(c => MapHelper.MapResponseMaintenanceToDto(c));
         }
 
         public IEnumerable<ResponseMaintenanceDto> GetMaintenaceByCarId(int? carId)
         {
-            var maintenance = _maintenanceRepo.GetMaintenaceByCarId(carId);
+            var maintenance = _maintenanceRepo.GetMaintenanceByCarId(carId);
             return maintenance.Select(c => MapHelper.MapResponseMaintenanceToDto(c));
         }
 
         public IEnumerable<ResponseMaintenanceDto> GetMaintenaceByGarageId(int? garageId)
         {
-            var maintenance = _maintenanceRepo.GetMaintenaceByGarageId(garageId);
+            var maintenance = _maintenanceRepo.GetMaintenanceByGarageId(garageId);
             return maintenance.Select(c => MapHelper.MapResponseMaintenanceToDto(c));
         }
 
@@ -101,15 +102,20 @@ namespace car_management_backend.Services
             var car = _carRepo.GetCarById(maintenanceDto.CarId);
             var garage = _garageRepo.GetGarageById(maintenanceDto.GarageId);
 
-            maintenance.GarageId = garage.GarageId;
-            maintenance.GarageName = garage.Name;
-            maintenance.CarId = car.CarId;
-            maintenance.CarName = car.Make;
-            maintenance.ServiceType = maintenanceDto.ServiceType;
-            maintenance.ScheduledTime = maintenanceDto.ScheduledTime.ToString("yyyy-mm-dd");
+            if (maintenance != null && car != null && garage != null)
+            {
+                maintenance.GarageId = garage.GarageId;
+                maintenance.GarageName = garage.Name;
+                maintenance.CarId = car.CarId;
+                maintenance.CarName = car.Make;
+                maintenance.ServiceType = maintenanceDto.ServiceType;
+                maintenance.ScheduledTime = maintenanceDto.ScheduledTime.ToString("yyyy-mm-dd");
 
-            _maintenanceRepo.UpdateMaintenace(maintenance);
-            _maintenanceRepo.SaveChanges();
+                _maintenanceRepo.UpdateMaintenance(maintenance);
+                _maintenanceRepo.SaveChanges();
+                MapHelper.MapUpdateMaintenanceToDto(maintenance);
+            }
+            
         }
     }
 }

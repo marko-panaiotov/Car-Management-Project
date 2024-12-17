@@ -175,25 +175,6 @@ namespace car_management_backend.Services
                 throw new InvalidOperationException($"Car with ID {id} does not exist.");
             }
 
-            /*foreach (var carGarage in car.CarGarages)
-            {
-                var garage = _garageRepo.GetGarageById(carGarage.GarageId);
-
-                if (garage == null)
-                {
-                    throw new InvalidOperationException($"Garage with ID {carGarage.GarageId} does not exist.");
-                }
-
-                if (garage.Capacity >= 0)
-                {
-                    garage.Capacity++;
-                    
-                }
-                _garageRepo.UpdateGarage(garage);
-            }
-            
-            _garageRepo.SaveChanges();*/
-
             _carRepo.DeleteCar(id);
             _carRepo.SaveChanges();
         }
