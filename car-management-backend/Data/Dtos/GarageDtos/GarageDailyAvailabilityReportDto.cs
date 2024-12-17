@@ -10,7 +10,7 @@ namespace car_management_backend.Data.Dtos.GarageDtos
 {
     public class GarageDailyAvailabilityReportDto
     {
-        public DateTime Date {  get; set; }
+        public DateTime Date {  get; set; }=DateTime.Now;
         public int Requests { get; set; }
         public int AvailableCapacity { get; set; }
     }

@@ -23,7 +23,9 @@ namespace car_management_backend.Services
         public void AddNewMaintenace(CreateMaintenanceDto maintenanceDto)
         {
             var car = _carRepo.GetCarById(maintenanceDto.CarId);
+
             var garage = _garageRepo.GetGarageById(maintenanceDto.GarageId);
+            
             var maintenance = new Maintenance
             {
                 GarageId = garage.GarageId,
@@ -31,11 +33,12 @@ namespace car_management_backend.Services
                 CarId = car.CarId,
                 CarName = car.Make,
                 ServiceType = maintenanceDto.ServiceType,
-                ScheduledTime = maintenanceDto.ScheduledTime.ToString("yyyy-mm-dd")
+                ScheduledDate = maintenanceDto.ScheduledDate
             };
 
             _maintenanceRepo.AddNewMaintenance(maintenance);
             _maintenanceRepo.SaveChanges();
+
             MapHelper.MapCreateMaintenanceToDto(maintenance);
         }
 
@@ -47,17 +50,19 @@ namespace car_management_backend.Services
 
         public IEnumerable<ResponseMaintenanceDto> GetAllMaintenances(int? carId, int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            if (carId != null || garageId != 0 || startDate != null && endDate != null)
+            var test= startDate;
+            var test3 =endDate;
+            if (carId != null || garageId != null || startDate.HasValue && endDate.HasValue)
             {
                 if (carId != null)
                 {
                     return GetMaintenaceByCarId(carId);
                 }
-                if (garageId != 0)
+                if (garageId != null)
                 {
                     return GetMaintenaceByGarageId(garageId);
                 }
-                if (startDate != null && endDate != null)
+                if (startDate.HasValue && endDate.HasValue)
                 {
                     return GetMaintenanceFromYearToYear(startDate, endDate);
                 }
@@ -109,7 +114,7 @@ namespace car_management_backend.Services
                 maintenance.CarId = car.CarId;
                 maintenance.CarName = car.Make;
                 maintenance.ServiceType = maintenanceDto.ServiceType;
-                maintenance.ScheduledTime = maintenanceDto.ScheduledTime.ToString("yyyy-mm-dd");
+                maintenance.ScheduledDate = maintenanceDto.ScheduledDate;
 
                 _maintenanceRepo.UpdateMaintenance(maintenance);
                 _maintenanceRepo.SaveChanges();

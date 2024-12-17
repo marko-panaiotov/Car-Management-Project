@@ -12,7 +12,7 @@ using car_management_backend.Data;
 namespace car_management_backend.Data.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241215164024_Initial")]
+    [Migration("20241217170556_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -145,9 +145,8 @@ namespace car_management_backend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ScheduledTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ScheduledDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ServiceType")
                         .IsRequired()
@@ -186,7 +185,7 @@ namespace car_management_backend.Data.Migrations
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany()
                         .HasForeignKey("GarageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Garage");
@@ -197,13 +196,13 @@ namespace car_management_backend.Data.Migrations
                     b.HasOne("car_management_backend.Data.Entities.Car", "Car")
                         .WithMany("Maintenances")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
                         .WithMany("Maintenances")
                         .HasForeignKey("GarageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Car");

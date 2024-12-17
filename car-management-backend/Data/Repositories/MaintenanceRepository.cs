@@ -18,17 +18,17 @@ namespace car_management_backend.Data.Repositories
             return _dbContext.Maintenances
                 .Include(m => m.Car) // Join with Car table
                 .Include(m => m.Garage)
-                .Select(m=> new Maintenance 
+                /*.Select(m=> new Maintenance 
                 { 
                     ServiceType = m.ServiceType,
-                    ScheduledTime = m.ScheduledTime,
-                    GarageId = m.Garage.GarageId,
-                    GarageName = m.GarageName,
-                    CarId = m.Car.CarId,
+                    ScheduledDate = m.ScheduledDate,
+                   // GarageId = m.Garage.GarageId,
+                    GarageName = m.Garage.Name,
+                    //CarId = m.Car.CarId,
                     CarName = m.Car.Make,
 
-                })
-                     .ToList();
+                })*/
+                .ToList();
             // throw new NotImplementedException();
         }
 
@@ -60,15 +60,14 @@ namespace car_management_backend.Data.Repositories
 
         public IEnumerable<Maintenance> GetMaintenanceFromYearToYear(DateTime? startDate, DateTime? endDate)
         {
-           /* return _dbContext.Maintenances
+            return _dbContext.Maintenances
                  .Include(c => c.Car)
                  .Include(g => g.Garage)
                  .Where(c =>
-                         c.Car.ProductionYear >= startDate &&
-                          c.Car.ProductionYear <= endDate
+                         c.ScheduledDate >= startDate.Value &&
+                         c.ScheduledDate <= endDate.Value
                  )
-                 .ToList();*/
-            throw new NotImplementedException();
+                 .ToList();
         }
 
         public Maintenance AddNewMaintenance(Maintenance maintenance)

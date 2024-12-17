@@ -86,7 +86,7 @@ namespace car_management_backend.Data.Migrations
                         column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "GarageId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +98,7 @@ namespace car_management_backend.Data.Migrations
                     CarId = table.Column<int>(type: "int", nullable: false),
                     CarName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ServiceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ScheduledTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ScheduledDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GarageId = table.Column<int>(type: "int", nullable: false),
                     GarageName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -110,13 +110,13 @@ namespace car_management_backend.Data.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "CarId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Maintenances_Garages_GarageId",
                         column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "GarageId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

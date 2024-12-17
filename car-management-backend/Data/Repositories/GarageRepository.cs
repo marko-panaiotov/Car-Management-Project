@@ -33,31 +33,42 @@ namespace car_management_backend.Data.Repositories
 
         public Garage GetGarageById(int id)
         {
-            // var garageReport = _dbContext.GarageReports.FirstOrDefault(g => g.Garage.GarageId == id);
-            // var garageById = _dbContext.Garages.Find(id);
             var garageById = _dbContext.Garages.FirstOrDefault(g => g.GarageId == id);
-            var today = DateTime.Now;
-            var todayReport = _dbContext.GarageReports
-                   .FirstOrDefault(r => r.GarageId == id && r.Date != today);
+            var today = DateTime.Now.Date;
 
-            if (todayReport != null && garageById != null && todayReport.Garage.GarageId == garageById.GarageId)
+            if (garageById == null)
             {
-                // garageReport.Requests++; // Increment the request count in the report
-
-               _apiGarageCallCount = _dbContext.GarageReports
-                          .Where(r => r.GarageId == id && r.Date != today)
-                          .Select(r => r.Requests)
-                          .FirstOrDefault();
-                 // Increment the global API call count
-                 //_apiGarageCallCount++;
-                todayReport.Requests = _apiGarageCallCount;
-                _dbContext.GarageReports.Update(todayReport); // Update the report in the database
-                                                               // Save changes to the database
-                _dbContext.SaveChanges();
+                return null;
             }
-            
+
+            var todayReport = _dbContext.GarageReports
+                .FirstOrDefault(r => r.GarageId == id && r.Date == today);
+
+            if (todayReport != null)
+            {
+                _apiGarageCallCount = todayReport.Requests + 1; // Increment the requests
+               // _apiGarageCallCount++;
+                todayReport.Requests=_apiGarageCallCount;
+                _dbContext.GarageReports.Update(todayReport);
+                _apiGarageCallCount = 0;
+            }
+            else
+            {
+                var newReport = new GarageReport
+                {
+                    GarageId = id,
+                    Date = today,
+                    Requests = 0,
+                    AvailableCapacity = garageById.Capacity - garageById.CarGarages.Count
+                };
+
+                _dbContext.GarageReports.Add(newReport);
+            }
+
+            _dbContext.SaveChanges();
+
             return garageById;
-          
+
         }
         public Garage AddGarage(Garage garage)
         {
@@ -86,7 +97,7 @@ namespace car_management_backend.Data.Repositories
             if (!startDate.HasValue || !endDate.HasValue)
                 throw new ArgumentException("Start date and end date must be provided.");
 
-            var today = DateTime.Now;
+            var today = DateTime.Now.Date;
 
             if (garageId.HasValue)
             {
@@ -100,18 +111,17 @@ namespace car_management_backend.Data.Repositories
                 var todayReport = _dbContext.GarageReports
                     .FirstOrDefault(r => r.GarageId == garageId.Value && r.Date == today);
 
+                var availableCapacity = garage.Capacity - garage.CarGarages.Count;
+
                 if (todayReport != null)
                 {
-
                     _apiGarageCallCount = _dbContext.GarageReports
-                            .Where(r => r.GarageId == garageId.Value && r.Date == today)
-                            .Select(r => r.Requests)
-                            .FirstOrDefault();
-
-                    //_apiGarageCallCount++;
+                        .Where(r => r.GarageId == garageId.Value && r.Date == today)
+                        .Select(r => r.Requests)
+                        .FirstOrDefault();
 
                     todayReport.Requests = _apiGarageCallCount;
-                    todayReport.AvailableCapacity = garage.Capacity - garage.CarGarages.Count;
+                    todayReport.AvailableCapacity = availableCapacity;
 
                     _dbContext.GarageReports.Update(todayReport);
                 }
@@ -122,7 +132,7 @@ namespace car_management_backend.Data.Repositories
                         GarageId = garageId.Value,
                         Date = today,
                         Requests = _apiGarageCallCount,
-                        AvailableCapacity = garage.Capacity - garage.CarGarages.Count
+                        AvailableCapacity = availableCapacity
                     };
 
                     _dbContext.GarageReports.Add(newReport);
@@ -148,13 +158,9 @@ namespace car_management_backend.Data.Repositories
                 GarageId = r.GarageId,
                 Date = r.Date,
                 Requests = r.Requests,
-                AvailableCapacity = (r.Date == today 
-                                    && garageId.HasValue 
-                                    && r.GarageId == garageId.Value
-                                    )
-                                    ? garageData[r.GarageId].Capacity - garageData[r.GarageId].CarCount
-                                    : r.AvailableCapacity
-
+                AvailableCapacity = (r.Date == today && garageId.HasValue && r.GarageId == garageId.Value)
+                    ? garageData[r.GarageId].Capacity - garageData[r.GarageId].CarCount
+                    : r.AvailableCapacity
             }).ToList();
 
             return stats;

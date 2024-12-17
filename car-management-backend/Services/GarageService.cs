@@ -89,29 +89,56 @@ namespace car_management_backend.Services
 
         public IEnumerable<GarageDailyAvailabilityReportDto> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            GarageReport garageReport = new GarageReport();
+            /*  GarageReport garageReport = new GarageReport();
 
-            var result = _garageRepo.GetGarageById((int)garageId);
-            
-            var dailyAvailabilityReports = _garageRepo.DailyAvailabilityReport(garageId, startDate, endDate);
+              var result = _garageRepo.GetGarageById((int)garageId);
+
+              var dailyAvailabilityReports = _garageRepo.DailyAvailabilityReport(garageId, startDate, endDate);
+
+              if (!garageId.HasValue)
+                  throw new ArgumentException("GarageId must be provided.");
+
+              var garage = _garageRepo.GetGarageById(garageId.Value);
+              if (garage == null)
+                  throw new InvalidOperationException($"Garage with ID {garageId.Value} not found.");
+
+              var reportDtos = dailyAvailabilityReports.Select(dailyAvailability => new GarageDailyAvailabilityReportDto
+              {
+                  Date = dailyAvailability.Date,
+                  Requests = dailyAvailability.Requests,
+                  AvailableCapacity=dailyAvailability.AvailableCapacity                                                             
+              }).ToList();
+
+
+              MapHelper.MapGarageDailyAvailabilityReportToDto(dailyAvailabilityReports.FirstOrDefault());
+              return reportDtos;*/
+            GarageReport garageReport = new GarageReport();
+            garageReport.Id = garageId.Value; 
 
             if (!garageId.HasValue)
                 throw new ArgumentException("GarageId must be provided.");
 
-            var garage = _garageRepo.GetGarageById(garageId.Value);
+            var garage = _garageRepo.GetGarageById(garageReport.Id);
             if (garage == null)
                 throw new InvalidOperationException($"Garage with ID {garageId.Value} not found.");
 
+            if (startDate.HasValue && endDate.HasValue && startDate.Value > endDate.Value)
+                throw new ArgumentException("StartDate must be earlier than EndDate.");
+
+            var dailyAvailabilityReports = _garageRepo.DailyAvailabilityReport(garageId, startDate, endDate);
+
             var reportDtos = dailyAvailabilityReports.Select(dailyAvailability => new GarageDailyAvailabilityReportDto
             {
-                Date = dailyAvailability.Date,
+                Date = dailyAvailability.Date, // Ensure the format is correct
                 Requests = dailyAvailability.Requests,
-                AvailableCapacity=dailyAvailability.AvailableCapacity                                                             
+                AvailableCapacity = dailyAvailability.AvailableCapacity
             }).ToList();
 
+            // Optionally map the first element, if needed (but this seems unnecessary)
+             MapHelper.MapGarageDailyAvailabilityReportToDto(garageReport);
 
-            MapHelper.MapGarageDailyAvailabilityReportToDto(dailyAvailabilityReports.FirstOrDefault());
             return reportDtos;
+
         }
     }
 }

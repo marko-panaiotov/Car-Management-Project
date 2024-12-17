@@ -90,7 +90,6 @@ namespace car_management_backend.Utilities.Helpers
 
         public static GarageDailyAvailabilityReportDto MapGarageDailyAvailabilityReportToDto(GarageReport garageReport)
         {
-
             return new GarageDailyAvailabilityReportDto()
             {
                 Date = garageReport.Date,
@@ -106,7 +105,7 @@ namespace car_management_backend.Utilities.Helpers
             {
                 CarId = maintenance.Car.CarId,
                 ServiceType = maintenance.ServiceType,
-                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
+                ScheduledDate = maintenance.ScheduledDate,
                 GarageId = maintenance.Garage.GarageId
 
             };
@@ -118,7 +117,7 @@ namespace car_management_backend.Utilities.Helpers
             {
                 CarId = maintenance.Car.CarId,
                 ServiceType = maintenance.ServiceType,
-                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
+                ScheduledDate = maintenance.ScheduledDate,
                 GarageId = maintenance.Garage.GarageId
 
             };
@@ -128,13 +127,13 @@ namespace car_management_backend.Utilities.Helpers
         {
             return new ResponseMaintenanceDto()
             {
-                Id= maintenance.Id,
-                CarId = maintenance.Car.CarId,
-                CarName = maintenance.Car.Make+" "+ maintenance.Car.Model,
+                Id = maintenance.Id,
+                CarId = maintenance.CarId,
+                CarName = maintenance.CarName,
                 ServiceType = maintenance.ServiceType,
-                ScheduledTime = DateTime.ParseExact(maintenance.ScheduledTime, "yyyy-mm-dd", null, System.Globalization.DateTimeStyles.AssumeUniversal),
-                GarageId = maintenance.Garage.GarageId,
-                GarageName = maintenance.Garage.Name
+                ScheduledDate = maintenance.ScheduledDate,
+                GarageId = maintenance.GarageId,
+                GarageName = maintenance.GarageName
             };
         }
 

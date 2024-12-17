@@ -8,6 +8,6 @@ namespace car_management_backend.Data.Dtos.MaintenanceDtos
         public int GarageId { get; set; }
         public int CarId { get; set; }
         public string ServiceType { get; set; } = null!;
-        public DateTime ScheduledTime { get; set; }=DateTime.Now;
+        public DateTime ScheduledDate { get; set; }
     }
 }
