@@ -34,29 +34,34 @@ namespace car_management_backend.Data.Repositories
         public Garage GetGarageById(int id)
         {
             var garageById = _dbContext.Garages.FirstOrDefault(g => g.GarageId == id);
+            return garageById;
+        }
+        public Garage AddGarage(Garage garage)
+        {
+            _dbContext.Garages.Add(garage);
+            return garage;
+        }
+        public void UpdateGarage(Garage garage)
+        {
+            var garageById = _dbContext.Garages.FirstOrDefault(g => g.GarageId == garage.GarageId);
             var today = DateTime.Now.Date;
 
-            if (garageById == null)
-            {
-                return null;
-            }
 
             var todayReport = _dbContext.GarageReports
-                .FirstOrDefault(r => r.GarageId == id && r.Date == today);
+                .FirstOrDefault(r => r.GarageId == garage.GarageId && r.Date == today);
 
             if (todayReport != null)
             {
-                _apiGarageCallCount = todayReport.Requests + 1; // Increment the requests
-               // _apiGarageCallCount++;
-                todayReport.Requests=_apiGarageCallCount;
+
+                _apiGarageCallCount = todayReport.Requests + 1;
+                todayReport.Requests = _apiGarageCallCount;
                 _dbContext.GarageReports.Update(todayReport);
-                _apiGarageCallCount = 0;
             }
             else
             {
                 var newReport = new GarageReport
                 {
-                    GarageId = id,
+                    GarageId = garage.GarageId,
                     Date = today,
                     Requests = 0,
                     AvailableCapacity = garageById.Capacity - garageById.CarGarages.Count
@@ -67,16 +72,6 @@ namespace car_management_backend.Data.Repositories
 
             _dbContext.SaveChanges();
 
-            return garageById;
-
-        }
-        public Garage AddGarage(Garage garage)
-        {
-            _dbContext.Garages.Add(garage);
-            return garage;
-        }
-        public void UpdateGarage(Garage garage)
-        {
             _dbContext.Garages.Update(garage);
         }
         public void DeleteGarage(int id)
@@ -131,7 +126,7 @@ namespace car_management_backend.Data.Repositories
                     {
                         GarageId = garageId.Value,
                         Date = today,
-                        Requests = _apiGarageCallCount,
+                        Requests = 0,
                         AvailableCapacity = availableCapacity
                     };
 

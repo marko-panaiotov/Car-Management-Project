@@ -4,6 +4,7 @@ using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Utilities.Helpers;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 
 namespace car_management_backend.Services
@@ -96,11 +97,6 @@ namespace car_management_backend.Services
             return maintenance.Select(c => MapHelper.MapResponseMaintenanceToDto(c));
         }
 
-        public IEnumerable<MonthlyRequestsReportDto> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateMaintenace(int id, UpdateMaintenanceDto maintenanceDto)
         {
             var maintenance = _maintenanceRepo.GetMaintenaceById(id);
@@ -120,7 +116,33 @@ namespace car_management_backend.Services
                 _maintenanceRepo.SaveChanges();
                 MapHelper.MapUpdateMaintenanceToDto(maintenance);
             }
-            
+
         }
+
+        public IEnumerable<MonthlyRequestsReportDto> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
+        {
+            var requestsCount = _dbContext.
+            .Where(r => (!serviceId.HasValue || r.ServiceId == serviceId) &&
+                        r.CreatedDate.Year == month.Year &&
+                        r.CreatedDate.Month == month.Month)
+            .Count();
+
+            report.Add(new MonthlyRequestsReportDTO
+            {
+                YearMonth = new YearMonth
+                {
+                    Year = month.Year,
+                    Month = month.ToString("MMMM").ToUpper(),
+                    LeapYear = DateTime.IsLeapYear(month.Year),
+                    MonthValue = month.Month
+                },
+                Requests = requestsCount
+            });
+        
+
+    return report;
+        }
+
+       
     }
 }

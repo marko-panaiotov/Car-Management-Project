@@ -9,6 +9,7 @@ namespace car_management_backend.Data.Repositories
     public class CarRepository : ICarRepository
     {
         private readonly CarManagementDbContext _dbContext;
+        private static int _apiGarageCallCount = 1;
 
         public CarRepository(CarManagementDbContext dbContext)
         {
@@ -39,10 +40,33 @@ namespace car_management_backend.Data.Repositories
 
         public IEnumerable<Car> GetCarsByGarageId(int? carByGarageid)
         {
-            /*  return _dbContext.Cars
-                  .Include(c => c.Garage)
-                  .Where(c => c.CarGarageId == carByGarageid)
-                  .ToList();*/
+            var garageById = _dbContext.Garages.FirstOrDefault(g => g.GarageId == carByGarageid);
+            var today = DateTime.Now.Date;
+
+            var todayReport = _dbContext.GarageReports
+                .FirstOrDefault(r => r.GarageId == carByGarageid && r.Date == today);
+
+            if (todayReport != null)
+            {
+
+                _apiGarageCallCount = todayReport.Requests + 1;
+                todayReport.Requests = _apiGarageCallCount;
+                _dbContext.GarageReports.Update(todayReport);
+            }
+            else
+            {
+                var newReport = new GarageReport
+                {
+                    GarageId = garageById.GarageId,
+                    Date = today,
+                    Requests = 0,
+                    AvailableCapacity = garageById.Capacity - garageById.CarGarages.Count
+                };
+
+                _dbContext.GarageReports.Add(newReport);
+            }
+
+            _dbContext.SaveChanges();
 
             return _dbContext.Cars
                     .Include(c => c.CarGarages)
@@ -84,6 +108,9 @@ namespace car_management_backend.Data.Repositories
         public void UpdateCar(Car car)
         {
             _dbContext.Cars.Update(car);
+
+            _dbContext.SaveChanges();
+
         }
 
         public void SaveChanges()

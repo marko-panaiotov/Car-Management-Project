@@ -137,5 +137,14 @@ namespace car_management_backend.Utilities.Helpers
             };
         }
 
+        public static MonthlyRequestsReportDto MapMonthlyRequestsReportDto(MaintenanceReport maintenanceReport) 
+        {
+            return new MonthlyRequestsReportDto()
+            {
+                YearMonth = maintenanceReport.YearMonth,
+                Requests = maintenanceReport.Requests
+            };
+        }
+
     }
 }

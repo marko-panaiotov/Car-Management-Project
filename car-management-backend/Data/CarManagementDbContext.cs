@@ -16,7 +16,8 @@ namespace car_management_backend.Data
         public DbSet<Garage> Garages { get; set; }
         public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<GarageReport> GarageReports { get; set; }
-       // public DbSet<CarGarage> CarGarages { get; set; } = null!;
+        public DbSet<CarGarage> CarGarages { get; set; }
+        public DbSet<MaintenanceReport> MaintenanceReports { get; set; }
 
         public CarManagementDbContext(DbContextOptions<CarManagementDbContext> options) : base(options)
         {

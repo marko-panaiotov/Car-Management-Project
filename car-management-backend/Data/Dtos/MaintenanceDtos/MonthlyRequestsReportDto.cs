@@ -1,8 +1,10 @@
-﻿namespace car_management_backend.Data.Dtos.MaintenanceDtos
+﻿using car_management_backend.Data.Entities;
+
+namespace car_management_backend.Data.Dtos.MaintenanceDtos
 {
     public class MonthlyRequestsReportDto
     {
-        public List<int> YearMonth {  get; set; }
-        public int Requeasts { get; set; }
+        public YearMonth YearMonth {  get; set; }
+        public int Requests { get; set; }
     }
 }
