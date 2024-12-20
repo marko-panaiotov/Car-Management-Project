@@ -121,26 +121,28 @@ namespace car_management_backend.Services
 
         public IEnumerable<MonthlyRequestsReportDto> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            var requestsCount = _dbContext.
-            .Where(r => (!serviceId.HasValue || r.ServiceId == serviceId) &&
-                        r.CreatedDate.Year == month.Year &&
-                        r.CreatedDate.Month == month.Month)
-            .Count();
+            //        var requestsCount = _dbContext.
+            //        .Where(r => (!serviceId.HasValue || r.ServiceId == serviceId) &&
+            //                    r.CreatedDate.Year == month.Year &&
+            //                    r.CreatedDate.Month == month.Month)
+            //        .Count();
 
-            report.Add(new MonthlyRequestsReportDTO
-            {
-                YearMonth = new YearMonth
-                {
-                    Year = month.Year,
-                    Month = month.ToString("MMMM").ToUpper(),
-                    LeapYear = DateTime.IsLeapYear(month.Year),
-                    MonthValue = month.Month
-                },
-                Requests = requestsCount
-            });
-        
+            //        report.Add(new MonthlyRequestsReportDTO
+            //        {
+            //            YearMonth = new YearMonth
+            //            {
+            //                Year = month.Year,
+            //                Month = month.ToString("MMMM").ToUpper(),
+            //                LeapYear = DateTime.IsLeapYear(month.Year),
+            //                MonthValue = month.Month
+            //            },
+            //            Requests = requestsCount
+            //        });
 
-    return report;
+
+            //return report;
+
+            throw new NotImplementedException();
         }
 
        
