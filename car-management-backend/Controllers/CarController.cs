@@ -1,4 +1,5 @@
-﻿using car_management_backend.Data.Dtos.CarDtos;
+﻿using System.ComponentModel.DataAnnotations;
+using car_management_backend.Data.Dtos.CarDtos;
 using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Services.Interfaces;
 using car_management_backend.Utilities.Helpers;
@@ -41,7 +42,7 @@ namespace car_management_backend.Controllers
         [HttpPost]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<ResponseCarDto>> AddNewCar([FromBody] CreateCarDto car)
+        public async Task<ActionResult<ResponseCarDto>> AddNewCar([FromBody][Required] CreateCarDto car)
         {
             _carService.CreateCar(car);
             return Ok(car);
@@ -51,7 +52,7 @@ namespace car_management_backend.Controllers
         [SwaggerResponse(200, "Resource updated")]
         [SwaggerResponse(400, "Bad request")]
         [SwaggerResponse(404, "Resource not found")]
-        public async Task<ActionResult<ResponseCarDto>> UpdateCar(int id, [FromBody] UpdateCarDto car)
+        public async Task<ActionResult<ResponseCarDto>> UpdateCar(int id, [FromBody][Required] UpdateCarDto car)
         {
             _carService.UpdateCar(id,car);
             return Ok(car);

@@ -42,7 +42,7 @@ namespace car_management_backend.Controllers
         [HttpPost]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<ResponseMaintenanceDto>> AddNewMaintenance([FromBody] CreateMaintenanceDto garageDto)
+        public async Task<ActionResult<ResponseMaintenanceDto>> AddNewMaintenance([FromBody][Required] CreateMaintenanceDto garageDto)
         {
             _maintenanceService.AddNewMaintenace(garageDto);
             return Ok(garageDto);
@@ -52,7 +52,7 @@ namespace car_management_backend.Controllers
         [SwaggerResponse(200, "Resource updated")]
         [SwaggerResponse(400, "Bad request")]
         [SwaggerResponse(404, "Resource not found")]
-        public async Task<ActionResult<ResponseMaintenanceDto>> UpdateMaintenance(int id, [FromBody] UpdateMaintenanceDto maintenanceDto)
+        public async Task<ActionResult<ResponseMaintenanceDto>> UpdateMaintenance(int id, [FromBody][Required] UpdateMaintenanceDto maintenanceDto)
         {
             _maintenanceService.UpdateMaintenace(id, maintenanceDto);
             return Ok(maintenanceDto);
@@ -71,7 +71,7 @@ namespace car_management_backend.Controllers
         [HttpGet("monthlyRequestsReport")]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<MonthlyRequestsReportDto>> MonthlyRequestsReport([FromQuery][Required]  int? garageId, [FromQuery][Required] string? startMonth, [FromQuery][Required] string? endMonth)
+        public async Task<ActionResult<MonthlyRequestsReportDto>> MonthlyRequestsReport([FromQuery][Required]  int garageId, [FromQuery][Required] string startMonth, [FromQuery][Required] string endMonth)
         {
             var report = _maintenanceService.MonthlyRequestsReport(garageId, startMonth, endMonth);
             return Ok(report);

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics.Metrics;
 using System.Net;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace car_management_backend.Controllers
 {
@@ -45,7 +46,7 @@ namespace car_management_backend.Controllers
         [HttpPost]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<ResponseGarageDto>> AddNewGarage([FromBody] CreateGarageDto garageDto)
+        public async Task<ActionResult<ResponseGarageDto>> AddNewGarage([FromBody][Required] CreateGarageDto garageDto)
         {
             _garageService.CreateGarage(garageDto);
             return Ok(garageDto);
@@ -55,7 +56,7 @@ namespace car_management_backend.Controllers
         [SwaggerResponse(200, "Resource updated")]
         [SwaggerResponse(400, "Bad request")]
         [SwaggerResponse(404, "Resource not found")]
-        public async Task<ActionResult<ResponseGarageDto>> UpdateGarage(int id, [FromBody] UpdateGarageDto garageDto)
+        public async Task<ActionResult<ResponseGarageDto>> UpdateGarage(int id, [FromBody][Required] UpdateGarageDto garageDto)
         {
             _garageService.UpdateGarage(id, garageDto);
             return Ok(garageDto);
@@ -74,7 +75,7 @@ namespace car_management_backend.Controllers
         [HttpGet("dailyAvailabilityReport")]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<GarageDailyAvailabilityReportDto>> DailyAvailabilityReport([FromQuery] int? garageId, [FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+        public async Task<ActionResult<GarageDailyAvailabilityReportDto>> DailyAvailabilityReport([FromQuery][Required] int garageId, [FromQuery][Required] DateTime startDate, [FromQuery][Required] DateTime endDate)
         {
             var report = _garageService.DailyAvailabilityReport(garageId, startDate, endDate);
             return Ok(report);
