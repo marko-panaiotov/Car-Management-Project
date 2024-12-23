@@ -3,8 +3,9 @@
     public class MaintenanceReport
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public YearMonth YearMonth { get; set; }
+        public int GarageId { get; set; }
+        public Garage Garage { get; set; }
         public int Requests { get; set; }
     }
 }

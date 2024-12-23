@@ -1,23 +1,14 @@
 ﻿<Properties StartupConfiguration="{6B6EA578-1A86-4554-ACF9-FA16C2C9EA07}|http">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.car-management-backend PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Data/Repositories/Interfaces/IMaintenanceRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="appsettings.Development.json" />
-      <File FileName="Properties/launchSettings.json" />
-      <File FileName="appsettings.json" />
-      <File FileName="Program.cs" />
-      <File FileName="Data/CarManagementDbContext.cs" />
-      <File FileName="Services/MaintenanceService.cs" />
-      <File FileName="Services/Interfaces/IMaintenanceService.cs" />
-      <File FileName="Utilities/Helpers/MapHelper.cs" />
-      <File FileName="Data/Repositories/Interfaces/IMaintenanceRepository.cs" Line="8" Column="6" />
-      <File FileName="Data/Repositories/Interfaces/IGarageRepository.cs" />
+      <File FileName="Services/MaintenanceService.cs" Line="144" Column="81" />
+      <File FileName="Services/Interfaces/IMaintenanceService.cs" Line="11" Column="100" />
+      <File FileName="Data/Repositories/Interfaces/IMaintenanceRepository.cs" Line="15" Column="101" />
+      <File FileName="Data/Repositories/MaintenanceRepository.cs" Line="216" Column="116" />
+      <File FileName="Data/Entities/MaintenanceReport.cs" Line="5" Column="36" />
+      <File FileName="Controllers/MaintenanceController.cs" Line="62" Column="51" />
+      <File FileName="Data/Dtos/MaintenanceDtos/MonthlyRequestsReportDto.cs" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="141" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,20 +16,30 @@
           <Node name="car-management-backend">
             <Node name="car-management-backend">
               <Node name="Data" expanded="True">
+                <Node name="Dtos" expanded="True">
+                  <Node name="MaintenanceDtos" expanded="True" />
+                </Node>
+                <Node name="Entities" expanded="True" />
                 <Node name="Repositories" expanded="True">
-                  <Node name="Interfaces" expanded="True">
-                    <Node name="IMaintenanceRepository.cs" selected="True" />
-                  </Node>
+                  <Node name="Interfaces" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Utilities" expanded="True">
-                <Node name="Helpers" expanded="True" />
-              </Node>
+              <Node name="Services" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.car-management-backend PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/Marko/Documents/University/Fourth year 2024-2025/Introduction to Web Server Languages/Project/Car-Management-Project/car-management-backend/Controllers/MaintenanceController.cs" relfile="Controllers/MaintenanceController.cs" line="75" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

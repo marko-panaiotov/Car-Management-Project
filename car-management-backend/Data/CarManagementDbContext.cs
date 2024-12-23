@@ -39,6 +39,11 @@ namespace car_management_backend.Data
               .HasForeignKey(m => m.GarageId)
               .OnDelete(DeleteBehavior.Restrict);*/
 
+            modelBuilder.Entity<MaintenanceReport>()
+           .HasOne(m => m.Garage)
+               .WithMany()
+               .HasForeignKey(m => m.GarageId);
+
             modelBuilder.Entity<GarageReport>()
             .HasOne(m => m.Garage)
                 .WithMany()

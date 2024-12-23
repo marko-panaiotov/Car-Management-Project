@@ -1,4 +1,5 @@
-﻿using car_management_backend.Data.Dtos.GarageDtos;
+﻿using Azure.Identity;
+using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Dtos.MaintenanceDtos;
 using car_management_backend.Data.Entities;
 using car_management_backend.Data.Repositories.Interfaces;
@@ -26,12 +27,15 @@ namespace car_management_backend.Services
             var car = _carRepo.GetCarById(maintenanceDto.CarId);
 
             var garage = _garageRepo.GetGarageById(maintenanceDto.GarageId);
-            
+
+            maintenanceDto.CarId = car.CarId;
+            maintenanceDto.GarageId = garage.GarageId;
+
             var maintenance = new Maintenance
             {
-                GarageId = garage.GarageId,
+                GarageId = maintenanceDto.GarageId,
                 GarageName = garage.Name,
-                CarId = car.CarId,
+                CarId = maintenanceDto.CarId,
                 CarName = car.Make,
                 ServiceType = maintenanceDto.ServiceType,
                 ScheduledDate = maintenanceDto.ScheduledDate
@@ -119,32 +123,25 @@ namespace car_management_backend.Services
 
         }
 
-        public IEnumerable<MonthlyRequestsReportDto> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
+        public IEnumerable<MonthlyRequestsReportDto> MonthlyRequestsReport(int? garageId, string startDate, string endDate)
         {
-            //        var requestsCount = _dbContext.
-            //        .Where(r => (!serviceId.HasValue || r.ServiceId == serviceId) &&
-            //                    r.CreatedDate.Year == month.Year &&
-            //                    r.CreatedDate.Month == month.Month)
-            //        .Count();
 
-            //        report.Add(new MonthlyRequestsReportDTO
-            //        {
-            //            YearMonth = new YearMonth
-            //            {
-            //                Year = month.Year,
-            //                Month = month.ToString("MMMM").ToUpper(),
-            //                LeapYear = DateTime.IsLeapYear(month.Year),
-            //                MonthValue = month.Month
-            //            },
-            //            Requests = requestsCount
-            //        });
+            var report = _maintenanceRepo.MonthlyRequestsReport(garageId, startDate, endDate);
+            var reportDtos = report.Select(dailyAvailability => new MonthlyRequestsReportDto
+            {
+                YearMonth = new YearMonth()
+                {
+
+                    //Year = dailyAvailability.YearMonth.Year,
+                    Month = dailyAvailability.YearMonth.Month,
+                   //LeapYear = dailyAvailability.YearMonth.LeapYear,
+                   // MonthValue = dailyAvailability.YearMonth.MonthValue
+                },
+                Requests = dailyAvailability.Requests
+            }).ToList();
 
 
-            //return report;
-
-            throw new NotImplementedException();
-        }
-
-       
+            return report.Select(r => MapHelper.MapMonthlyRequestsReportDto(r));
+        }  
     }
 }

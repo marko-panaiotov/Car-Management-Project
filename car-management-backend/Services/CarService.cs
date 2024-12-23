@@ -117,7 +117,6 @@ namespace car_management_backend.Services
             {
                 var garage = _garageRepo.GetGarageById(garageId);
                 var carGarageToRemove = car.CarGarages.FirstOrDefault(cg => cg.GarageId == garageId);
-                //var carGarageCapacitry = car.CarGarages.Select(cg => cg.Garage.Capacity).ToList();
 
                 if (garage != null)
                 {
@@ -129,24 +128,11 @@ namespace car_management_backend.Services
                             GarageId = garageId
                         });
                        
-                       /* if (garage.Capacity <= carGarageCapacitry.Capacity)
-                        {
-                            carGarageCapacitry.Capacity--;
-                            //garage.Capacity--;
-
-                        }
-
-                        //garage.Capacity--;
-                        _garageRepo.UpdateGarage(garage);*/
+                       
                     }
                     if (carDto.GarageIds.Count() >= 1)
                     {
-                       /* if (garage.Capacity >= 0)
-                        {
-                            garage.Capacity++;
-
-                        }
-                        _garageRepo.UpdateGarage(garage);*/
+                       
                         car.CarGarages.Remove(carGarageToRemove);
                     }
                     if (carDto.GarageIds.Count() == 1)

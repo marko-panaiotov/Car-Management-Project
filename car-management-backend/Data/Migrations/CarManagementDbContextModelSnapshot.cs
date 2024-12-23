@@ -166,9 +166,8 @@ namespace car_management_backend.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GarageId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Requests")
                         .HasColumnType("int");
@@ -177,6 +176,8 @@ namespace car_management_backend.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GarageId");
 
                     b.HasIndex("YearMonthId");
 
@@ -194,8 +195,9 @@ namespace car_management_backend.Data.Migrations
                     b.Property<bool>("LeapYear")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
+                    b.Property<string>("Month")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MonthValue")
                         .HasColumnType("int");
@@ -259,11 +261,19 @@ namespace car_management_backend.Data.Migrations
 
             modelBuilder.Entity("car_management_backend.Data.Entities.MaintenanceReport", b =>
                 {
+                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
+                        .WithMany()
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("car_management_backend.Data.Entities.YearMonth", "YearMonth")
                         .WithMany()
                         .HasForeignKey("YearMonthId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Garage");
 
                     b.Navigation("YearMonth");
                 });

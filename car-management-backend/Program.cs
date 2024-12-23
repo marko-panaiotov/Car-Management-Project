@@ -13,7 +13,7 @@ using System.Globalization;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using car_management_backend.Utilities.Parser;
-
+using car_management_backend.Data.Entities;
 
 namespace car_management_backend
 {
@@ -43,9 +43,56 @@ namespace car_management_backend
             builder.Services.AddEndpointsApiExplorer();
             // builder.Services.AddSwaggerGen();
 
+            var currentMonth = DateTime.Now.ToString("MMMM").ToUpper(); // "JANUARY", "FEBRUARY", etc.
+
+
             builder.Services.AddSwaggerGen(c =>
             {
                 c.EnableAnnotations(); // Make sure annotations are enabled for Swagger
+
+                c.MapType<YearMonth>(() => new OpenApiSchema
+                {
+                    Type = "object",
+                    Properties =
+            {
+            ["year"] = new OpenApiSchema
+            {
+                Type = "integer",
+                Example = new OpenApiInteger(0)
+            },
+            ["month"] = new OpenApiSchema
+            {
+                   Type = "string",
+                Enum = new[]
+                {
+                    new OpenApiString("JANUARY"),
+                    new OpenApiString("FEBRUARY"),
+                    new OpenApiString("MARCH"),
+                    new OpenApiString("APRIL"),
+                    new OpenApiString("MAY"),
+                    new OpenApiString("JUNE"),
+                    new OpenApiString("JULY"),
+                    new OpenApiString("AUGUST"),
+                    new OpenApiString("SEPTEMBER"),
+                    new OpenApiString("OCTOBER"),
+                    new OpenApiString("NOVEMBER"),
+                    new OpenApiString("DECEMBER")
+                },
+                Example = new OpenApiString(currentMonth) // Set the current month dynamically
+            },
+            ["leapYear"] = new OpenApiSchema
+            {
+                Type = "boolean",
+                Example = new OpenApiBoolean(true)
+            },
+            ["monthValue"] = new OpenApiSchema
+            {
+                Type = "integer",
+                Example = new OpenApiInteger(0)
+                }
+            }
+                }); ;
+
                 c.MapType<DateTime>(() => new OpenApiSchema
                 {
                     Type = "string",

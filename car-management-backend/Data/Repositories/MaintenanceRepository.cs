@@ -2,6 +2,7 @@
 using car_management_backend.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
+using System.Globalization;
 
 namespace car_management_backend.Data.Repositories
 {
@@ -16,20 +17,9 @@ namespace car_management_backend.Data.Repositories
         public IEnumerable<Maintenance> GetAllMaintenances()
         {
             return _dbContext.Maintenances
-                .Include(m => m.Car) // Join with Car table
+                .Include(m => m.Car)
                 .Include(m => m.Garage)
-                /*.Select(m=> new Maintenance 
-                { 
-                    ServiceType = m.ServiceType,
-                    ScheduledDate = m.ScheduledDate,
-                   // GarageId = m.Garage.GarageId,
-                    GarageName = m.Garage.Name,
-                    //CarId = m.Car.CarId,
-                    CarName = m.Car.Make,
-
-                })*/
                 .ToList();
-            // throw new NotImplementedException();
         }
 
         public IEnumerable<Maintenance> GetMaintenanceByCarId(int? carId)
@@ -88,17 +78,29 @@ namespace car_management_backend.Data.Repositories
                .FirstOrDefault(c => c.Id == id);
             _dbContext.Maintenances.Remove(maintenanceToDelete);
         }
-    
-        public IEnumerable<Maintenance> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate)
-        {
-           /* if (!startDate.HasValue || !endDate.HasValue)
-                throw new ArgumentException("Start date and end date must be provided.");
 
-            var today = DateTime.Now.Date;
+        public IEnumerable<MaintenanceReport> MonthlyRequestsReport(int? garageId, string startDate, string endDate)
+        {
+            if (!DateOnly.TryParseExact(startDate, "yyyy-MM", null, DateTimeStyles.None, out DateOnly parsedStartDate))
+                throw new ArgumentException("Invalid start date format. Use yyyy-MM.");
+
+            if (!DateOnly.TryParseExact(endDate, "yyyy-MM", null, DateTimeStyles.None, out DateOnly parsedEndDate))
+                throw new ArgumentException("Invalid end date format. Use yyyy-MM.");
+
+            if (parsedStartDate > parsedEndDate)
+                throw new ArgumentException("Start date cannot be after end date.");
+
+            var startOfMonth = parsedStartDate;
+            var endOfMonth = parsedEndDate.AddMonths(1).AddDays(-1);
+
+            var startDateTime = startOfMonth.ToDateTime(TimeOnly.MinValue);
+            var endDateTime = endOfMonth.ToDateTime(TimeOnly.MinValue);
+
+            var today = DateTime.Today;
 
             if (garageId.HasValue)
             {
-                var garage= _dbContext.Garages
+                var garage = _dbContext.Garages
                     .Include(g => g.CarGarages)
                     .FirstOrDefault(g => g.GarageId == garageId.Value);
 
@@ -106,66 +108,84 @@ namespace car_management_backend.Data.Repositories
                     throw new ArgumentException("Garage not found.");
 
                 var todayReport = _dbContext.MaintenanceReports
-                    .FirstOrDefault();
+                    .FirstOrDefault(r => r.YearMonth.Year == today.Year && r.YearMonth.MonthValue == today.Month && r.GarageId == garageId.Value);
 
-                var availableCapacity = garage.Capacity - garage.CarGarages.Count;
+                var requestsToday = _dbContext.MaintenanceReports 
+                    .Count(r => r.YearMonth.Year == today.Year && r.GarageId == garageId.Value);
 
                 if (todayReport != null)
                 {
-                    _apiGarageCallCount = _dbContext.GarageReports
-                        .Where(r => r.GarageId == garageId.Value && r.Date == today)
-                        .Select(r => r.Requests)
-                        .FirstOrDefault();
-
-                    todayReport.Requests = _apiGarageCallCount;
-                    todayReport.AvailableCapacity = availableCapacity;
-
-                    _dbContext.GarageReports.Update(todayReport);
+                    todayReport.GarageId = garageId.Value;
+                    todayReport.YearMonth = new YearMonth
+                    {
+                        Year = today.Year,
+                        Month = today.ToString("MMMM").ToUpper(),
+                        LeapYear = DateTime.IsLeapYear(today.Year),
+                        MonthValue = today.Month
+                    };
+                    todayReport.Requests = requestsToday;
+                    _dbContext.MaintenanceReports.Update(todayReport);
                 }
                 else
                 {
-                    var newReport = new GarageReport
+                    var newReport = new MaintenanceReport
                     {
                         GarageId = garageId.Value,
-                        Date = today,
-                        Requests = 0,
-                        AvailableCapacity = availableCapacity
+                        YearMonth = new YearMonth
+                        {
+                            Year = today.Year,
+                            Month = today.ToString("MMMM").ToUpper(),
+                            LeapYear = DateTime.IsLeapYear(today.Year),
+                            MonthValue = today.Month
+                        },
+                        Requests = requestsToday,
                     };
 
-                    _dbContext.GarageReports.Add(newReport);
+                    _dbContext.MaintenanceReports.Add(newReport);
                 }
 
                 _dbContext.SaveChanges();
             }
 
-            var query = _dbContext.MaintenanceReports
-                .Where(r => r.YearMonth.Month >= startDate.Value && r.Date <= endDate.Value);
+            var query = _dbContext.MaintenanceReports.AsQueryable();
 
             if (garageId.HasValue)
             {
                 query = query.Where(r => r.GarageId == garageId.Value);
             }
 
-            var garageData = _dbContext.Garages
-                .Include(g => g.CarGarages)
-                .ToDictionary(g => g.GarageId, g => new { g.Capacity, CarCount = g.CarGarages.Count });
+            query = query.Where(r =>
+                r.YearMonth.Year * 100 + r.YearMonth.MonthValue >= startDateTime.Year * 100 + startDateTime.Month &&
+                r.YearMonth.Year * 100 + r.YearMonth.MonthValue <= endDateTime.Year * 100 + endDateTime.Month);
 
-            var stats = query.Select(r => new MaintenanceReport
+            var stats = query.ToList();
+
+            var monthsInRange = Enumerable.Range(0, ((endOfMonth.Year - startOfMonth.Year) * 12) + endOfMonth.Month - startOfMonth.Month + 1)
+                .Select(i => startOfMonth.AddMonths(i))
+                .ToList();
+
+            var result = monthsInRange.Select(date =>
             {
-                YearMonth = r.,
-                Date = r.Date,
-                Requests = r.Requests,
-                AvailableCapacity = (r.Date == today && garageId.HasValue && r.GarageId == garageId.Value)
-                    ? garageData[r.GarageId].Capacity - garageData[r.GarageId].CarCount
-                    : r.AvailableCapacity
+                var existingReport = stats.FirstOrDefault(r =>
+                    r.YearMonth.Year == date.Year && r.YearMonth.MonthValue == date.Month);
+
+                return existingReport ?? new MaintenanceReport
+                {
+                    GarageId = (int)garageId,
+                    YearMonth = new YearMonth
+                    {
+                        Year = date.Year,
+                        Month = date.ToString("MMMM").ToUpper(),
+                        LeapYear = DateTime.IsLeapYear(date.Year),
+                        MonthValue = date.Month
+                    },
+                    Requests = 0
+                };
             }).ToList();
 
-            return stats;*/
-
-
-
-             throw new NotImplementedException();
+            return result;
         }
+
 
         public void SaveChanges()
         {

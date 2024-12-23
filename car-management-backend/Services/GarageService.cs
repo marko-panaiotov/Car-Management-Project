@@ -89,29 +89,6 @@ namespace car_management_backend.Services
 
         public IEnumerable<GarageDailyAvailabilityReportDto> DailyAvailabilityReport(int? garageId, DateTime? startDate, DateTime? endDate)
         {
-            /*  GarageReport garageReport = new GarageReport();
-
-              var result = _garageRepo.GetGarageById((int)garageId);
-
-              var dailyAvailabilityReports = _garageRepo.DailyAvailabilityReport(garageId, startDate, endDate);
-
-              if (!garageId.HasValue)
-                  throw new ArgumentException("GarageId must be provided.");
-
-              var garage = _garageRepo.GetGarageById(garageId.Value);
-              if (garage == null)
-                  throw new InvalidOperationException($"Garage with ID {garageId.Value} not found.");
-
-              var reportDtos = dailyAvailabilityReports.Select(dailyAvailability => new GarageDailyAvailabilityReportDto
-              {
-                  Date = dailyAvailability.Date,
-                  Requests = dailyAvailability.Requests,
-                  AvailableCapacity=dailyAvailability.AvailableCapacity                                                             
-              }).ToList();
-
-
-              MapHelper.MapGarageDailyAvailabilityReportToDto(dailyAvailabilityReports.FirstOrDefault());
-              return reportDtos;*/
             GarageReport garageReport = new GarageReport();
             garageReport.Id = garageId.Value; 
 

@@ -11,7 +11,7 @@ namespace car_management_backend.Data.Repositories.Interfaces
         IEnumerable<Maintenance> GetMaintenanceByCarId(int? carId);
         IEnumerable<Maintenance> GetMaintenanceByGarageId(int? garageId);
         IEnumerable<Maintenance> GetMaintenanceFromYearToYear(DateTime? startDate, DateTime? endDate);
-        IEnumerable<Maintenance> MonthlyRequestsReport(int? garageId, DateTime? startDate, DateTime? endDate);
+        IEnumerable<MaintenanceReport> MonthlyRequestsReport(int? garageId, string startDate, string endDate);
         Maintenance AddNewMaintenance(Maintenance maintenance);
         void UpdateMaintenance(Maintenance maintenance);
         void DeleteMaintenance(int id);

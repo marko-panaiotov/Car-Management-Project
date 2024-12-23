@@ -1,7 +1,9 @@
-﻿using car_management_backend.Data.Dtos.GarageDtos;
+﻿using System.ComponentModel.DataAnnotations;
+using car_management_backend.Data.Dtos.GarageDtos;
 using car_management_backend.Data.Dtos.MaintenanceDtos;
 using car_management_backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace car_management_backend.Controllers
@@ -69,10 +71,10 @@ namespace car_management_backend.Controllers
         [HttpGet("monthlyRequestsReport")]
         [SwaggerResponse(200, "Resource created")]
         [SwaggerResponse(400, "Bad request")]
-        public async Task<ActionResult<MonthlyRequestsReportDto>> MonthlyRequestsReport([FromQuery] int? garageId, [FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+        public async Task<ActionResult<MonthlyRequestsReportDto>> MonthlyRequestsReport([FromQuery][Required]  int? garageId, [FromQuery][Required] string? startMonth, [FromQuery][Required] string? endMonth)
         {
-            _maintenanceService.MonthlyRequestsReport(garageId, startDate, endDate);
-            return Ok(true);
+            var report = _maintenanceService.MonthlyRequestsReport(garageId, startMonth, endMonth);
+            return Ok(report);
         }
 
 

@@ -12,8 +12,8 @@ using car_management_backend.Data;
 namespace car_management_backend.Data.Migrations
 {
     [DbContext(typeof(CarManagementDbContext))]
-    [Migration("20241218134940_AddedCarGarages")]
-    partial class AddedCarGarages
+    [Migration("20241223064855_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,58 @@ namespace car_management_backend.Data.Migrations
                     b.ToTable("Maintenances");
                 });
 
+            modelBuilder.Entity("car_management_backend.Data.Entities.MaintenanceReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GarageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Requests")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YearMonthId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GarageId");
+
+                    b.HasIndex("YearMonthId");
+
+                    b.ToTable("MaintenanceReports");
+                });
+
+            modelBuilder.Entity("car_management_backend.Data.Entities.YearMonth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("LeapYear")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Month")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MonthValue")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("YearMonth");
+                });
+
             modelBuilder.Entity("car_management_backend.Data.Entities.CarGarage", b =>
                 {
                     b.HasOne("car_management_backend.Data.Entities.Car", "Car")
@@ -208,6 +260,25 @@ namespace car_management_backend.Data.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("Garage");
+                });
+
+            modelBuilder.Entity("car_management_backend.Data.Entities.MaintenanceReport", b =>
+                {
+                    b.HasOne("car_management_backend.Data.Entities.Garage", "Garage")
+                        .WithMany()
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("car_management_backend.Data.Entities.YearMonth", "YearMonth")
+                        .WithMany()
+                        .HasForeignKey("YearMonthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Garage");
+
+                    b.Navigation("YearMonth");
                 });
 
             modelBuilder.Entity("car_management_backend.Data.Entities.Car", b =>

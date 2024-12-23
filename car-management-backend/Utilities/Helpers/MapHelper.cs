@@ -139,9 +139,16 @@ namespace car_management_backend.Utilities.Helpers
 
         public static MonthlyRequestsReportDto MapMonthlyRequestsReportDto(MaintenanceReport maintenanceReport) 
         {
+            var yearMonth = new YearMonth
+            {
+                Year = maintenanceReport.YearMonth.Year,
+                Month = maintenanceReport.YearMonth.Month ?? CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(maintenanceReport.YearMonth.MonthValue).ToUpper(),
+                LeapYear = DateTime.IsLeapYear(maintenanceReport.YearMonth.Year),
+                MonthValue = maintenanceReport.YearMonth.MonthValue
+            };
             return new MonthlyRequestsReportDto()
             {
-                YearMonth = maintenanceReport.YearMonth,
+                YearMonth = yearMonth,
                 Requests = maintenanceReport.Requests
             };
         }
