@@ -106,12 +106,11 @@ namespace car_management_backend.Services
 
             var reportDtos = dailyAvailabilityReports.Select(dailyAvailability => new GarageDailyAvailabilityReportDto
             {
-                Date = dailyAvailability.Date, // Ensure the format is correct
+                Date = dailyAvailability.Date,
                 Requests = dailyAvailability.Requests,
                 AvailableCapacity = dailyAvailability.AvailableCapacity
             }).ToList();
 
-            // Optionally map the first element, if needed (but this seems unnecessary)
              MapHelper.MapGarageDailyAvailabilityReportToDto(garageReport);
 
             return reportDtos;

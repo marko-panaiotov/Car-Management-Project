@@ -18,11 +18,6 @@ namespace car_management_backend.Data.Repositories
 
         public IEnumerable<Car> GetAllCars()
         {
-            /* return _dbContext.Cars
-                 .AsNoTracking()
-                 .Include(c => c.CarGarages)
-                 .ToList();*/
-
             return _dbContext.Cars
                 .Include(c => c.CarGarages)
                 .ThenInclude(cg => cg.Garage)
@@ -94,6 +89,44 @@ namespace car_management_backend.Data.Repositories
 
         public Car AddCar(Car car)
         {
+            var carGarage = car.CarGarages.FirstOrDefault();
+            if (carGarage == null)
+            {
+                throw new InvalidOperationException("The car is not associated with any garage.");
+            }
+
+            var garageById = _dbContext.Garages
+                .FirstOrDefault(g => g.GarageId == carGarage.GarageId);
+
+            if (garageById == null)
+            {
+                throw new InvalidOperationException("Garage not found for the given car.");
+            }
+
+            var today = DateTime.Now.Date;
+
+            var todayReport = _dbContext.GarageReports
+                .FirstOrDefault(r => r.GarageId == garageById.GarageId && r.Date == today);
+
+            if (todayReport != null)
+            {
+                todayReport.Requests += 1;
+                _dbContext.GarageReports.Update(todayReport);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                var newReport = new GarageReport
+                {
+                    GarageId = garageById.GarageId,
+                    Date = today,
+                    Requests = 1,
+                    AvailableCapacity = garageById.Capacity - (garageById.CarGarages?.Count ?? 0)
+                };
+
+                _dbContext.GarageReports.Add(newReport);
+            }
+
             _dbContext.Cars.Add(car);
             return car;
         }
@@ -107,6 +140,43 @@ namespace car_management_backend.Data.Repositories
 
         public void UpdateCar(Car car)
         {
+           var carGarage = car.CarGarages.FirstOrDefault();
+            if (carGarage == null)
+            {
+                throw new InvalidOperationException("The car is not associated with any garage.");
+            }
+
+            var garageById = _dbContext.Garages
+                .FirstOrDefault(g => g.GarageId == carGarage.GarageId);
+
+            if (garageById == null)
+            {
+                throw new InvalidOperationException("Garage not found for the given car.");
+            }
+
+            var today = DateTime.Now.Date;
+
+            var todayReport = _dbContext.GarageReports
+                .FirstOrDefault(r => r.GarageId == garageById.GarageId && r.Date == today);
+
+            if (todayReport != null)
+            {
+                todayReport.Requests += 1;
+                _dbContext.GarageReports.Update(todayReport);
+            }
+            else
+            {
+                var newReport = new GarageReport
+                {
+                    GarageId = garageById.GarageId,
+                    Date = today,
+                    Requests = 1,
+                    AvailableCapacity = garageById.Capacity - (garageById.CarGarages?.Count ?? 0)
+                };
+
+                _dbContext.GarageReports.Add(newReport);
+            }
+
             _dbContext.Cars.Update(car);
 
             _dbContext.SaveChanges();
